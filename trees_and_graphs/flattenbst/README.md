@@ -25,3 +25,7 @@ The flattened tree should look like:
          \
           6
 ```
+
+Companies `[Facebook]`
+
+Source `[Leetcode]` - https://leetcode.com/problems/binary-tree-right-side-view/
