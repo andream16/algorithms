@@ -11,3 +11,7 @@ Example 2:
 - Input: `")()())"`
 - Output: `4`
 - Explanation: The longest valid parentheses substring is `"()()"`
+
+Companies [`Facebook`]
+
+Source `Leetcode` - https://leetcode.com/problems/longest-valid-parentheses/
