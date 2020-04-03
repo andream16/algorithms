@@ -8,7 +8,7 @@ Note that the returned canonical path must always begin with a slash /, and ther
 Example 1:
 
 - Input: `"/home/"`
-- Output: "/home"
+- Output: `"/home"`
 - Explanation: Note that there is no trailing slash after the last directory name.
 
 Example 2:
