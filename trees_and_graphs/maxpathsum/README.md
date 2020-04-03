@@ -27,3 +27,7 @@ Input: `[-10,9,20,null,null,15,7]`
 ```
 
 Output: `42`
+
+Companies [`Facebook`]
+
+Source `Leetcode` - https://leetcode.com/explore/interview/card/facebook/52/trees-and-graphs/3022/
