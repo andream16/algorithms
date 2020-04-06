@@ -15,4 +15,4 @@ Explanation:
 
 Companies `[Facebook]`
 
-Source `[Leetcode]` - https://leetcode.com/problems/binary-tree-right-side-view/
+Source `Leetcode` - https://leetcode.com/problems/binary-tree-right-side-view/

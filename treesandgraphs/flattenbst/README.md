@@ -28,4 +28,4 @@ The flattened tree should look like:
 
 Companies `[Facebook]`
 
-Source `[Leetcode]` - https://leetcode.com/explore/interview/card/facebook/52/trees-and-graphs/322/
+Source `Leetcode` - https://leetcode.com/explore/interview/card/facebook/52/trees-and-graphs/322/
