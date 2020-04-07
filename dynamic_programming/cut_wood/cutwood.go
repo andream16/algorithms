@@ -5,7 +5,10 @@ import (
 )
 
 func main() {
-	fmt.Println(cutWood([]int{5, 9, 7}, 4))
+	fmt.Println(cutWood([]int{5, 9, 7}, 3)) // 5
+	fmt.Println(cutWood([]int{5, 9, 7}, 4)) // 4
+	fmt.Println(cutWood([]int{232, 124, 456}, 7)) // 115
+	fmt.Println(cutWood([]int{1, 2, 3}, 7)) // 0
 }
 
 func cutWood(w []int, k int) int {
@@ -13,30 +16,41 @@ func cutWood(w []int, k int) int {
 		return 0
 	}
 	
-	totPieces, min := sumAndMin(w)
-	bLen, left, right, middle := 0, 1, min, 0
-	
-	for right != left {
-		middle = (left+right) / 2
-		if totPieces / middle >= k {
-			left = middle
-		} else {
-			right= middle
-		}
-		bLen = middle
+	n, min, ok := sumAndMinIfValid(w, k)
+	if !ok {
+		return 0
 	}
 	
-	return bLen
-	
+	return cutWoodRec(1, min, 0, k, k, n)
 }
 
-func sumAndMin(arr []int) (int, int) {
+func cutWoodRec(left, right, middle, bLen, k, n int) int {
+	//fmt.Println(left, right, middle, bLen)
+	middle = (left + right) / 2
+	
+	if left == right {
+		return bLen
+	}
+	
+	if (n / middle) >= k {
+		bLen = middle
+		left = middle+1
+	} else {
+		right = middle-1
+	}
+	return cutWoodRec(left, right, 0, bLen, k, n)
+}
+
+func sumAndMinIfValid(arr []int, k int) (int, int, bool) {
 	min, sum := arr[0], arr[0]
-	for i:=1; i<len(arr); i++ {
+	for i := 1; i < len(arr); i++ {
+		if arr[i] < k {
+			return 0, 0, false
+		}
 		if arr[i] < min {
 			min = arr[i]
 		}
 		sum += arr[i]
 	}
-	return sum, min
+	return sum, min, true
 }
