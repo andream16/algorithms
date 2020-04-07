@@ -1,4 +1,4 @@
-Given an int array wood representing the length of n pieces of wood and an int k. It is required to cut these pieces of wood such that more or equal to k pieces of the same length len are cut. What is the longest len you can get?
+Given an int array `wood` representing the length of n pieces of wood and an int `k`. It is required to cut these pieces of wood such that more or equal to `k` pieces of the same length len are cut. What is the longest len you can get?
 
 Example 1:
 
