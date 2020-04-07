@@ -1,60 +1,56 @@
 type stack struct {
-    p []string
+    parentheses []int
 }
 
-func (s *stack) push(str string) {
-    s.p = append([]string{str}, s.p...)
+func (s *stack) push(p int) {
+    s.parentheses = append([]int{p}, s.parentheses...)
 }
 
 func (s *stack) pop() {
-    if s.empty() {
+    if len(s.parentheses) == 0 {
         return
     }
-    s.p = s.p[1:]
+    s.parentheses = s.parentheses[1:]
 }
 
 func (s *stack) empty() bool {
-    return len(s.p) == 0
+    return len(s.parentheses) == 0
 }
 
-func (s *stack) reset() {
-    s.p = []string{}
+func (s *stack) peek() int {
+    return s.parentheses[0]
 }
 
 func longestValidParentheses(s string) int {
-    if s == "" {
-        return 0
-    }
     
     var (
-        counter = 0
-        longest = 0
+        m = 0
         stk = &stack{
-            p: []string{},
+            parentheses : []int{-1},
         }
     )
     
-    for _, c := range s {
-        fmt.Println(string(c), stk.p)
-        cs := string(c)
-        if cs == "(" {
-            stk.push(cs)
+    for i, c := range s {
+        if c == '(' {
+            stk.push(i)
             continue
         }
         stk.pop()
-        counter += 2
         if stk.empty() {
-            if counter > longest {
-                longest = counter
-            }
-            counter = 0
+            stk.push(i)
+            continue
         }
+        m = max(m, i - stk.peek())
     }
     
-    if counter > longest {
-        longest = counter
+    return m
+
+}
+
+
+func max(n1, n2 int) int {
+    if n1 >= n2 {
+        return n1
     }
-    
-    return longest
-    
+    return n2
 }
