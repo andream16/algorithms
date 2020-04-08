@@ -25,7 +25,6 @@ func cutWood(w []int, k int) int {
 }
 
 func cutWoodRec(left, right, middle, bLen, k, n int) int {
-	//fmt.Println(left, right, middle, bLen)
 	middle = (left + right) / 2
 	
 	if left == right {

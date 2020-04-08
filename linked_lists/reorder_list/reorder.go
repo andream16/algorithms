@@ -11,11 +11,18 @@ func main()  {
 				Val:  3,
 				Next: &ListNode{
 					Val:  4,
+					Next: &ListNode{
+						Val:  5,
+					},
 				},
 			},
 		},
 	}
 	reorderList(l)
+	for l != nil {
+		fmt.Println(l.Val)
+		l = l.Next
+	}
 }
 
 type ListNode struct {
@@ -23,26 +30,52 @@ type ListNode struct {
 	Next *ListNode
 }
 
+type Stack struct {
+	Nodes []*ListNode
+}
+
+func (q *Stack) push(node *ListNode) {
+	q.Nodes = append([]*ListNode{node}, q.Nodes...)
+}
+
+func (q *Stack) pop(ctr int) *ListNode {
+	var n *ListNode
+	if ctr % 2 == 0 {
+		n = q.Nodes[len(q.Nodes)-1]
+		q.Nodes = q.Nodes[:len(q.Nodes)-1]
+	} else {
+		n = q.Nodes[0]
+		q.Nodes = q.Nodes[1:]
+	}
+	return n
+}
+
+func (q *Stack) empty() bool {
+	return len(q.Nodes) == 0
+}
+
 func reorderList(head *ListNode)  {
 
-	l := &ListNode{}
-	nextNode := &ListNode{}
+	var (
+		n = head
+		q = &Stack{}
+		ctr int
+	)
 
-	for head != nil {
-		l.Val = head.Val
-		fmt.Println(l.Val)
-		nextNode = head.Next
-		for nextNode.Next != nil {
-			nextNode = nextNode.Next
-		}
-		head = head.Next
-		l.Next = nextNode
-		nextNode = nil
+	for n != nil {
+		q.push(n)
+		n = n.Next
 	}
 
-	for l.Next != nil {
-		fmt.Println(l.Val)
-		l = l.Next
+	for !q.empty() {
+		if len(q.Nodes) == 1 {
+			head.Next = nil
+		} else {
+			head.Next = &ListNode{}
+		}
+		head.Val = q.pop(ctr).Val
+		head = head.Next
+		ctr++
 	}
 
 }
