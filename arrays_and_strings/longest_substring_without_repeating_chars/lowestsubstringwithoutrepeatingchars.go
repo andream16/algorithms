@@ -1,3 +1,9 @@
+package main
+
+import "strings"
+
+func main() {}
+
 func lengthOfLongestSubstring(s string) int {
 
 	ls := len(s)

@@ -1,11 +1,12 @@
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
+package main
+
+func main() {}
+
+type TreeNode struct {
+    Val int
+    Left *TreeNode
+    Right *TreeNode
+}
 
 type LinkedList []*TreeNode
 

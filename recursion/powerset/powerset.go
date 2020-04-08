@@ -1,3 +1,7 @@
+package main
+
+func main() {}
+
 func subsets(nums []int) [][]int {
     return helper(nums, 0, [][]int{{}})
 }

@@ -1,11 +1,14 @@
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
+package main
+
+import "math"
+
+func main() {}
+
+type TreeNode struct {
+    Val int
+    Left *TreeNode
+    Right *TreeNode
+}
 
 type Queue struct {
     nodes []*TreeNode

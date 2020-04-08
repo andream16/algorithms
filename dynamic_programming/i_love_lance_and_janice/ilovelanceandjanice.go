@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 const (
 	alphabet = "abcdefghijklmnopqrstuvwxyz"
 	// a is 97, z is 122

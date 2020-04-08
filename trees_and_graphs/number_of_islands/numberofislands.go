@@ -1,3 +1,11 @@
+package main
+
+import (
+    "strconv"
+)
+
+func main() {}
+
 type island struct {
     lands []*land
 }

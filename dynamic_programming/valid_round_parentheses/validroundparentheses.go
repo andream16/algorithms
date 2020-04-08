@@ -1,3 +1,7 @@
+package main
+
+func main() {}
+
 type stack struct {
     parentheses []int
 }

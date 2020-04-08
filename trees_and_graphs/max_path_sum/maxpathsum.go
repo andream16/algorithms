@@ -1,3 +1,15 @@
+package main
+
+import "math"
+
+func main() {}
+
+type TreeNode struct {
+    Val int
+    Left *TreeNode
+    Right *TreeNode
+}
+
 func maxPathSum(root *TreeNode) int {
     if root == nil {
         return 0

@@ -1,3 +1,7 @@
+package main
+
+func main() {}
+
 func convertToTitle(n int) string {
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
