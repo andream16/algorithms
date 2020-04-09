@@ -24,29 +24,45 @@ func (q *Queue) empty() bool {
 }
 
 func cloneGraph(node *Node) *Node {
+	if node == nil {
+		return nil
+	}
 
 	var (
-		saw  = map[int]struct{}{}
-		seen = func(n int) bool {
-			_, ok := saw[n]
+		visited        = map[*Node]*Node{}
+		hasBeenVisited = func(n *Node) bool {
+			_, ok := visited[n]
 			return ok
 		}
-		q     = &Queue{}
-		clone = &Node{}
+		q = &Queue{}
 	)
 
 	q.enqueue(node)
 
 	for !q.empty() {
 		cn := q.dequeue()
-		if !seen(cn.Val) {
-			saw[cn.Val] = struct{}{}
-			for _, n := range cn.Neighbors {
+		for _, n := range cn.Neighbors {
+			if !hasBeenVisited(n) {
+				visited[n] = &Node{
+					Val:       n.Val,
+					Neighbors: nil,
+				}
 				q.enqueue(n)
 			}
+			if !hasBeenVisited(cn) {
+				visited[cn] = &Node{
+					Val: cn.Val,
+				}
+			}
+			visited[cn].Neighbors = append(visited[cn].Neighbors, visited[n])
 		}
-		clone.Val = cn.Val
-		clone.Neighbors = append([]*Node{}, cn.Neighbors...)
+	}
+
+	clone := visited[node]
+	if clone == nil || clone == (&Node{}) {
+		r := &Node{}
+		*r = *node
+		return r
 	}
 
 	return clone
@@ -54,5 +70,49 @@ func cloneGraph(node *Node) *Node {
 }
 
 func main() {
+	n := &Node{
+		Val: 1,
+		Neighbors: []*Node{
+			{
+				Val: 2,
+				Neighbors: []*Node{
+					{
+						Val: 1,
+					},
+					{
+						Val: 3,
+						Neighbors: []*Node{
+							{
+								Val: 2,
+							},
+							{
+								Val: 4,
+								Neighbors: []*Node{
+									{
+										Val: 1,
+									},
+									{
+										Val: 3,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			{
+				Val: 4,
+				Neighbors: []*Node{
+					{
+						Val: 1,
+					},
+					{
+						Val: 3,
+					},
+				},
+			},
+		},
+	}
 	// [[2,4],[1,3],[2,4],[1,3]],
+	cloneGraph(n)
 }
