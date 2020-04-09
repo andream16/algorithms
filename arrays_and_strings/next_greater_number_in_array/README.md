@@ -22,3 +22,5 @@ Note:
 - The length of both nums1 and nums2 would not exceed 1000.
 
 Companies [`Facebook`]
+
+Source `Leetcode` - https://leetcode.com/problems/next-greater-element-i/

@@ -12,3 +12,5 @@ Constraints:
 - `1 <= arr1[i]`, `arr2[i]`, `arr3[i] <= 2000`
 
 Companies [`Facebook`]
+
+Source `Leetcode` - https://leetcode.com/problems/intersection-of-three-sorted-arrays/
