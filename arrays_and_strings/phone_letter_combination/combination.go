@@ -2,6 +2,9 @@ package main
 
 import "fmt"
 
+// T: O(D*L*C), D = |digits|, L = |letters| per Digit, C = |previous combinations|
+// O(23) -> O(3^3, 3^3)
+// S: O(L^N)
 func letterCombinations(digits string) []string {
 	var (
 		combs   = []string{}

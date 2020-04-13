@@ -18,6 +18,8 @@ func main() {
 	fmt.Println(islandPerimeter(m))
 }
 
+// T: O(N*4) -> O(N)
+// S: M*N, one var for Perimeter
 func islandPerimeter(grid [][]int) int {
 
 	var (

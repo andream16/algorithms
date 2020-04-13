@@ -6,6 +6,8 @@ type NumMatrix struct {
 	matrix [][]int
 }
 
+// T: constructor O(R*C) + sumRegion O(SR*SC)
+// S: r*c, 1 for sum
 func Constructor(matrix [][]int) NumMatrix {
 	m := make([][]int, len(matrix))
 	for i := 0; i < len(matrix); i++ {

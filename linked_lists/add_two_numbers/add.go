@@ -7,6 +7,8 @@ type ListNode struct {
 	Next *ListNode
 }
 
+// T: O(max(|l1|,|l2|))
+// S: O(max(|l1|,|l2|)) + 1
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 
 	var (
@@ -21,9 +23,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 
 	for {
 
-		var (
-			v1, v2 int
-		)
+		var v1, v2 int
 
 		if l1 != nil {
 			v1 = l1.Val
@@ -33,14 +33,8 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		}
 
 		val := v1 + v2 + carry
-		carry = 0
-
-		if r := val % 10; val > 9 {
-			carry = 1
-			val = r
-		}
-
-		curr.Val = val
+		carry = val / 10
+		curr.Val = val % 10
 
 		if (l1 == nil || l1.Next == nil) && (l2 == nil || l2.Next == nil) {
 			if carry > 0 {

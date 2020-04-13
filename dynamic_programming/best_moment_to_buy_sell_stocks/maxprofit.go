@@ -5,6 +5,8 @@ import (
 	"math"
 )
 
+// T: O(n)
+// S: O(n)
 func maxProfit(prices []int) int {
 	var (
 		max = 0

@@ -8,6 +8,8 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+// T: DFS O(N)
+// S: O(N)
 func isValidBST(root *TreeNode) bool {
 	return helper(root, math.MinInt64, math.MaxInt64)
 }

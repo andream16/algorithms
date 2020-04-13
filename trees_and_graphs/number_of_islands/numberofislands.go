@@ -25,6 +25,8 @@ func numIslands(grid [][]byte) int {
 	return len(islands)
 }
 
+// T: BFS O(N*|islands*|land||) -> O(N*I*L)
+// S: |islands*lands|
 func addToIslands(x, y int, islands *[][]island) {
 	var boundaries []int
 	for idx, isl := range *islands {

@@ -23,6 +23,8 @@ func (q *Queue) empty() bool {
 	return len(q.nodes) == 0
 }
 
+// T: BFS O(N*|neighbours|)
+// S: N for map, M for subnodes in queue
 func cloneGraph(node *Node) *Node {
 	if node == nil {
 		return nil

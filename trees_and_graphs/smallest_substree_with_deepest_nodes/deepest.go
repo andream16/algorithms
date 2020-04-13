@@ -32,6 +32,8 @@ func (q *queue) empty() bool {
 	return len(q.nodes) == 0
 }
 
+// T: BFS O(N)+(|leaves|*H)
+// S: O(N) + |leaves|
 func subtreeWithAllDeepest(root *TreeNode) *TreeNode {
 	if root == nil {
 		return root

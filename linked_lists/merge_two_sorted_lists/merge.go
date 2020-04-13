@@ -5,6 +5,8 @@ type ListNode struct {
 	Next *ListNode
 }
 
+// T: O(max(|l1|,|l2|))
+// S: |l1|+|l2|
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 
 	var (

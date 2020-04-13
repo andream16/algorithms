@@ -26,6 +26,8 @@ func (q *queue) empty() bool {
 	return len(q.nodes) == 0
 }
 
+// T: BFS O(N)
+// S: size(queue) + 1 bool
 func isCompleteTree(root *TreeNode) bool {
 	if root == nil {
 		return true

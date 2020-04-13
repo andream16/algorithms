@@ -5,37 +5,39 @@ import (
 )
 
 func main() {
-	fmt.Println(cutWood([]int{5, 9, 7}, 3)) // 5
-	fmt.Println(cutWood([]int{5, 9, 7}, 4)) // 4
+	fmt.Println(cutWood([]int{5, 9, 7}, 3))       // 5
+	fmt.Println(cutWood([]int{5, 9, 7}, 4))       // 4
 	fmt.Println(cutWood([]int{232, 124, 456}, 7)) // 115
-	fmt.Println(cutWood([]int{1, 2, 3}, 7)) // 0
+	fmt.Println(cutWood([]int{1, 2, 3}, 7))       // 0
 }
 
+// T: O(log N)
+// S: left, right, middle, bLen, K, int
 func cutWood(w []int, k int) int {
 	if len(w) == 0 || k == 0 {
 		return 0
 	}
-	
+
 	n, min, ok := sumAndMinIfValid(w, k)
 	if !ok {
 		return 0
 	}
-	
+
 	return cutWoodRec(1, min, 0, k, k, n)
 }
 
 func cutWoodRec(left, right, middle, bLen, k, n int) int {
 	middle = (left + right) / 2
-	
+
 	if left == right {
 		return bLen
 	}
-	
+
 	if (n / middle) >= k {
 		bLen = middle
-		left = middle+1
+		left = middle + 1
 	} else {
-		right = middle-1
+		right = middle - 1
 	}
 	return cutWoodRec(left, right, 0, bLen, k, n)
 }

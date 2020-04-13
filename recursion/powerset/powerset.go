@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+// T: O(N*2^N) to generate and copy
+// S: O(N*2^N) to generate and copy
 func subsets(nums []int) [][]int {
 	return helper(nums, 0, [][]int{{}})
 }

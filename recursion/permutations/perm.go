@@ -4,28 +4,28 @@ import (
 	"fmt"
 )
 
+// T: O(N!)
+// S: O(N!)
 func permute(nums []int) [][]int {
-	var (
-		perms     = [][]int{}
-		candidate = []int{}
-	)
+	perms := [][]int{}
 	if len(nums) == 1 {
 		perms = append(perms, nums)
 		return perms
 	}
-	return helper(candidate, nums, perms)
+	backtrack(0, &nums, &perms)
+	return perms
 }
 
-func helper(candidate []int, nums []int, res [][]int) [][]int {
-	if len(nums) == 0 {
-		res = append(append([][]int{}, res...), candidate)
+// by moving the index & swapping current with next and back, we get all permutations starting with a given index first.
+func backtrack(first int, nums *[]int, res *[][]int) {
+	if first == len(*nums) {
+		*res = append(*res, append([]int{}, *(nums)...))
 	}
-	for i := 0; i < len(nums); i++ {
-		candidate = append(candidate, nums[i])
-		res = helper(candidate, append(nums[:i], nums[i+1:]...), res)
-		candidate = candidate[:len(candidate)-1]
+	for i := first; i < len(*nums); i++ {
+		(*nums)[first], (*nums)[i] = (*nums)[i], (*nums)[first]
+		backtrack(first+1, nums, res)
+		(*nums)[first], (*nums)[i] = (*nums)[i], (*nums)[first]
 	}
-	return res
 }
 
 func main() {

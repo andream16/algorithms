@@ -2,29 +2,6 @@ package main
 
 import "fmt"
 
-func main()  {
-	l := &ListNode{
-		Val:  1,
-		Next: &ListNode{
-			Val:  2,
-			Next: &ListNode{
-				Val:  3,
-				Next: &ListNode{
-					Val:  4,
-					Next: &ListNode{
-						Val:  5,
-					},
-				},
-			},
-		},
-	}
-	reorderList(l)
-	for l != nil {
-		fmt.Println(l.Val)
-		l = l.Next
-	}
-}
-
 type ListNode struct {
 	Val  int
 	Next *ListNode
@@ -40,7 +17,7 @@ func (q *Stack) push(node *ListNode) {
 
 func (q *Stack) pop(ctr int) *ListNode {
 	var n *ListNode
-	if ctr % 2 == 0 {
+	if ctr%2 == 0 {
 		n = q.Nodes[len(q.Nodes)-1]
 		q.Nodes = q.Nodes[:len(q.Nodes)-1]
 	} else {
@@ -54,11 +31,13 @@ func (q *Stack) empty() bool {
 	return len(q.Nodes) == 0
 }
 
-func reorderList(head *ListNode)  {
+// T: O(|list|) + O(|list|)
+// S: O(|list|)
+func reorderList(head *ListNode) {
 
 	var (
-		n = head
-		q = &Stack{}
+		n   = head
+		q   = &Stack{}
 		ctr int
 	)
 
@@ -78,4 +57,27 @@ func reorderList(head *ListNode)  {
 		ctr++
 	}
 
+}
+
+func main() {
+	l := &ListNode{
+		Val: 1,
+		Next: &ListNode{
+			Val: 2,
+			Next: &ListNode{
+				Val: 3,
+				Next: &ListNode{
+					Val: 4,
+					Next: &ListNode{
+						Val: 5,
+					},
+				},
+			},
+		},
+	}
+	reorderList(l)
+	for l != nil {
+		fmt.Println(l.Val)
+		l = l.Next
+	}
 }

@@ -34,6 +34,8 @@ func (q *queue) empty() bool {
 	return len(q.nodes) == 0
 }
 
+// T: BFS O(N)
+// S: min + O(bd)
 func minDepth(root *TreeNode) int {
 	if root == nil {
 		return 0
