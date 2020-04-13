@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+// T: O(N^2)
+// S: constant
 func subarraySum(nums []int, k int) int {
 	var nSubs, curr int
 	if len(nums) == 0 {
