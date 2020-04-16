@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 
-public class Solution {
+public class HeyIAlreadyDidThat {
 
     public static int solution(String n, int b) {
         HashMap<String, Integer> hs =new HashMap<>();

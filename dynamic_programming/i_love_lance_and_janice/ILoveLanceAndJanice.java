@@ -1,4 +1,4 @@
-public class Solution {
+public class ILoveLanceAndJanice {
     static String alphabet = "abcdefghijklmnopqrstuvwxyz";
     public static String solution(String x) {
         String msg = "";

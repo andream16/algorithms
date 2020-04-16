@@ -5,11 +5,11 @@ import (
 	"math/rand"
 )
 
-type Solution struct {
+type HeyIAlreadyDidThat struct {
 	valToRandIdx map[int][]int
 }
 
-func Constructor(nums []int) Solution {
+func Constructor(nums []int) HeyIAlreadyDidThat {
 	m := map[int][]int{}
 	for i, n := range nums {
 		if len(m[n]) == 0 {
@@ -18,12 +18,12 @@ func Constructor(nums []int) Solution {
 		}
 		m[n] = append(m[n], i)
 	}
-	return Solution{
+	return HeyIAlreadyDidThat{
 		valToRandIdx: m,
 	}
 }
 
-func (this *Solution) Pick(target int) int {
+func (this *HeyIAlreadyDidThat) Pick(target int) int {
 	return this.valToRandIdx[target][rand.Intn(len(this.valToRandIdx[target]))]
 }
 
