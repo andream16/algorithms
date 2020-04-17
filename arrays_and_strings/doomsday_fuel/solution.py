@@ -1,41 +1,52 @@
+import unittest
 from fractions import Fraction, gcd
 from functools import reduce
 
 
 def solution(m):
-    if len(m) == 0 or len(m[0]) == 0:
+
+    n_rows = len(m)
+
+    if n_rows == 0 or len(m[0]) == 0:
         return []
 
     num_absorbing_states = 0
 
-    for i in range(0, len(m)):
+    for i in range(0, n_rows):
         sum_row = 0
         if is_absorbing_state(m[i]):
             m[i][i] = 1
             num_absorbing_states += 1
+            continue
         else:
             for j in range(0, len(m[i])):
                 sum_row += m[i][j]
             for j in range(0, len(m[i])):
                 if m[i][j] != 0:
-                    m[i][j] = float(m[i][j]) / float(sum_row)
+                    m[i][j] = get_fraction(float(m[i][j]) / float(sum_row))
 
-    i = get_sub_matrix(m, len(m)-num_absorbing_states, num_absorbing_states-1)
-    q = get_sub_matrix(m, 0, len(m)-num_absorbing_states-1)
+    if num_absorbing_states == 1:
+        return [1, 1]
 
-    iq = sub(i, q)
-
-    f = get_f(iq)
-
-    r = sub_matrix(m, 0, len(m)-num_absorbing_states, len(m)-num_absorbing_states-1, len(m))
-
+    # F = (I-Q)^-1
+    i = sub_matrix(m, n_rows-num_absorbing_states, n_rows-num_absorbing_states, n_rows, n_rows)
+    q = sub_matrix(m, 0, 0, n_rows-num_absorbing_states, n_rows-num_absorbing_states)
+    # I-Q
+    diff = sub(i, q)
+    # (diff)^-1
+    f = get_f(diff)
+    r = sub_matrix(m, 0, n_rows-num_absorbing_states, n_rows-num_absorbing_states, n_rows)
     fr = product(f, r)
+
+    if len(fr) == 0:
+        return []
 
     denominators = []
     for n in fr[0]:
         if n != 0:
-            denominators.append(Fraction(n).limit_denominator(100000000000).denominator)
+            denominators.append(n.denominator)
 
+    # Least Common Multiple
     denominator = reduce(lambda a, b: a*b // gcd(a, b), denominators)
 
     res = []
@@ -43,39 +54,10 @@ def solution(m):
         if n == 0:
             res.append(0)
         else:
-            c = Fraction(n).limit_denominator(100000000000)
-            res.append(int(c.numerator * (denominator / c.denominator)))
+            res.append(int(n.numerator * (denominator / n.denominator)))
 
     res.append(denominator)
     return res
-
-
-def get_sub_matrix(m, begin, end):
-    nm = [[]]
-    cr = 0
-    found = False
-    for i in range(0, len(m)):
-        for j in range(0, len(m[i])):
-            if begin <= i <= end and begin <= j <= end:
-                if len(nm[cr]) == 0:
-                    nm.append([])
-                nm[cr].append(m[i][j])
-                found = True
-        if found:
-            cr += 1
-            found = False
-    return nm[:len(nm)-1]
-
-
-def sub_matrix(m, r1, c1, r2, c2):
-    sub_m = [[]]
-    for i in range(0, len(m)):
-        for j in range(0, len(m[i])):
-            if r1 <= i <= r2 and c1 <= j <= c2:
-                if len(sub_m[i]) == 0:
-                    sub_m.append([])
-                sub_m[i].append(m[i][j])
-    return sub_m[:len(sub_m)-1]
 
 
 def is_absorbing_state(nums):
@@ -85,37 +67,53 @@ def is_absorbing_state(nums):
     return True
 
 
+def sub_matrix(m, r1, c1, r2, c2):
+    sub_m = []
+    for i in range(r1, r2):
+        curr = []
+        for j in range(c1, c2):
+            curr.append(m[i][j])
+        if len(curr) > 0:
+            sub_m.append(curr)
+    return sub_m
+
+
 def sub(i, q):
-    res = [[]]
-    for k in range(0, len(i)):
-        for j in range(0, len(i[k])):
-            if len(res[k]) == 0:
-                res.append([])
-            res[k].append(i[k][j]-q[k][j])
-    return res[:len(res)-1]
+    min_row, min_col = min(len(i), len(q)), min(len(i[0]), len(q[0]))
+    res = []
+    for k in range(0, min_row):
+        curr = []
+        for j in range(0, min_col):
+            curr.append(i[k][j]-q[k][j])
+        res.append(curr)
+    return res
 
 
-def get_f(iq):
+def get_f(m):
+    determinant = get_determinant(m)
+    if len(m) == 2:
+        return [[m[1][1]/determinant, -1*m[0][1]/determinant],
+                [-1*m[1][0]/determinant, m[0][0]/determinant]]
 
-    det = 1 / get_determinant(iq)
-
-    trasp = traspose(iq)
-
-    for i in range(0, len(trasp)):
-        for j in range(0, len(trasp[i])):
-            trasp[i][j] = det * trasp[i][j]
-
-    return trasp
-
-
-def traspose(m):
-    trasp = []
-    if len(m) == 2 and len(m[0]) == 2:
-        trasp = [[m[1][1], -m[0][1]], [-m[1][0], m[0][0]]]
-    return trasp
+    cofactors = []
+    for r in range(len(m)):
+        cofactor_row = []
+        for c in range(len(m)):
+            minor = get_minor(m, r, c)
+            cofactor_row.append(((-1)**(r+c)) * get_determinant(minor))
+        cofactors.append(cofactor_row)
+    cofactors = transpose(cofactors)
+    for r in range(len(cofactors)):
+        for c in range(len(cofactors)):
+            cofactors[r][c] = cofactors[r][c]/determinant
+    return cofactors
 
 
-def get_matrix_minor(m, i, j):
+def transpose(m):
+    return map(list, zip(*m))
+
+
+def get_minor(m, i, j):
     return [row[:j] + row[j+1:] for row in (m[:i]+m[i+1:])]
 
 
@@ -125,7 +123,7 @@ def get_determinant(m):
 
     determinant = 0
     for c in range(len(m)):
-        determinant += ((-1)**c)*m[0][c]*get_determinant(get_matrix_minor(m, 0, c))
+        determinant += ((-1)**c)*m[0][c]*get_determinant(get_minor(m, 0, c))
     return determinant
 
 
@@ -133,12 +131,33 @@ def product(m1, m2):
     return [[sum(x * y for x, y in zip(m1_r, m2_c)) for m2_c in zip(*m2)] for m1_r in m1]
 
 
-def main():
-    # [0, 3, 2, 9, 14]
-    print(solution([[0, 1, 0, 0, 0, 1], [4, 0, 0, 3, 2, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]]))
-    # [7, 6, 8, 21]
-    print(solution([[0, 2, 1, 0, 0], [0, 0, 0, 3, 4], [0, 0, 0, 0, 0], [0, 0, 0, 0,0], [0, 0, 0, 0, 0]]))
+def get_fraction(n):
+    return Fraction(n).limit_denominator(100000000000)
+
+
+class TestSolution(unittest.TestCase):
+    def test1(self):
+        test_input = [
+            [0, 1, 0, 0, 0, 1],
+            [4, 0, 0, 3, 2, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0]
+        ]
+        self.assertEqual(solution(test_input), [0, 3, 2, 9, 14])
+
+    def test2(self):
+        test_input = [
+            [0, 2, 1, 0, 0],
+            [0, 0, 0, 3, 4],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0]
+        ]
+        self.assertEqual(solution(test_input), [7, 6, 8, 21])
 
 
 if __name__ == "__main__":
-    main()
+    unittest.main()
+

@@ -21,7 +21,7 @@ Write a function solution(x, y) which returns the prisoner ID of the bunny at lo
 Languages
 =========
 
-To provide a Java solution, edit HeyIAlreadyDidThat.java
+To provide a Java solution, edit Solution.java
 To provide a Python solution, edit solution.py
 
 Test cases
@@ -31,12 +31,12 @@ Note that it may also be run against hidden test cases not shown here.
 
 -- Java cases --
 Input:
-HeyIAlreadyDidThat.solution(3, 2)
+Solution.solution(3, 2)
 Output:
     9
 
 Input:
-HeyIAlreadyDidThat.solution(5, 10)
+Solution.solution(5, 10)
 Output:
     96
 

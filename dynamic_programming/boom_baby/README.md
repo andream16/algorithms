@@ -18,7 +18,7 @@ You need to know how many replication cycles (generations) it will take to gener
 Languages
 =========
 
-To provide a Java solution, edit HeyIAlreadyDidThat.java
+To provide a Java solution, edit Solution.java
 To provide a Python solution, edit solution.py
 
 Test cases
@@ -28,12 +28,12 @@ Note that it may also be run against hidden test cases not shown here.
 
 -- Java cases --
 Input:
-HeyIAlreadyDidThat.solution('2', '1')
+Solution.solution('2', '1')
 Output:
     1
 
 Input:
-HeyIAlreadyDidThat.solution('4', '7')
+Solution.solution('4', '7')
 Output:
     4
 

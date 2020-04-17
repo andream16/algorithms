@@ -38,7 +38,7 @@ So, putting that together, and making a common denominator, gives an answer in t
 Languages
 =========
 
-To provide a Java solution, edit BunnyPrisonerLocating.java
+To provide a Java solution, edit Solution.java
 To provide a Python solution, edit solution.py
 
 Test cases
