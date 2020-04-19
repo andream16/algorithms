@@ -1,4 +1,4 @@
 # algorithms
-Algorithms & Data Structures Q&A for big tech companies interviews divided by topic.
+Algorithms & Data Structures Q&A.
 
-Most of exercises come from `Leetcode`. Some of them are `Google Foobar` exercises.
+Most of exercises come from `Leetcode`. Some of them are `Google Foobar` exercises. The majority of the exercises are done using Go. I used Java or Python for the foobar exercises.

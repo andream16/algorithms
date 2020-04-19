@@ -1,1 +1,4 @@
 .idea/
+venv/
+out/
+algorithms.iml

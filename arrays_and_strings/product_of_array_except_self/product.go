@@ -30,6 +30,28 @@ func productExceptSelf(nums []int) []int {
 	return products
 }
 
+func getProduct(nums []int) []int {
+	if len(nums) == 0 {
+		return []int{}
+	}
+
+	products := make([]int, len(nums))
+	products[0] = 1
+
+	for i:=1; i<len(nums); i++ {
+		products[i] = nums[i-1] * products[i]
+	}
+
+	r := 1
+	for i:=len(nums)-1; i > 0; i-- {
+		products[i] = r * products[i]
+		r *= nums[i]
+	}
+
+	return products
+
+}
+
 func main() {
 	fmt.Println(productExceptSelf([]int{1, 2, 3, 4}))
 	// p[i] -> n-1 * p[i-1]
@@ -40,3 +62,4 @@ func main() {
 	// p[i] = p[i] * r
 	// r *= nums[i]
 }
+
