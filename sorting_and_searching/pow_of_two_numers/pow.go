@@ -18,5 +18,3 @@ func fastPow(x float64, n int) float64 {
 	}
 	return half * half * x
 }
-
-func main() {}

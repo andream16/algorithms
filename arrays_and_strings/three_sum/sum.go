@@ -36,7 +36,6 @@ func threeSum(nums []int) [][]int {
 				if !saw(nums[i], nums[left], nums[right]) {
 					res = append(res, []int{nums[i], nums[left], nums[right]})
 				}
-
 			}
 			if sum > complement {
 				right--

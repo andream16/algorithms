@@ -19,6 +19,8 @@ func productExceptSelf(nums []int) []int {
 		products[i] = nums[i-1] * products[i-1]
 	}
 
+	fmt.Println(products)
+
 	// Finalise the result by multiplying what's left on current number's right.
 	for i := l - 1; i >= 0; i-- {
 		products[i] = products[i] * right
@@ -30,4 +32,11 @@ func productExceptSelf(nums []int) []int {
 
 func main() {
 	fmt.Println(productExceptSelf([]int{1, 2, 3, 4}))
+	// p[i] -> n-1 * p[i-1]
+	// [1, 1, 2, 6]
+	// r=24
+	// [24, 12, 8, 6]
+	// r = 1
+	// p[i] = p[i] * r
+	// r *= nums[i]
 }
