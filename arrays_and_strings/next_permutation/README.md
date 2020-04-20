@@ -12,6 +12,6 @@ Here are some examples. Inputs are in the left-hand column and its corresponding
 1,1,5 → 1,5,1
 ```
 
-Companies [`Facebook`]
+Companies [`Facebook`, `Google`]
 
 Source `Leetcode` - https://leetcode.com/problems/next-permutation/

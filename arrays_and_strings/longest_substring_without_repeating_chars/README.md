@@ -19,3 +19,7 @@ Example 3:
 - Explanation: The answer is "wke", with the length of `3`. 
 
 Note that the answer must be a substring, `"pwke"` is a subsequence and not a substring.
+
+Companies [`Facebook`, `Google`]
+
+Source `Leetcode` - https://leetcode.com/explore/interview/card/google/59/array-and-strings/3047/

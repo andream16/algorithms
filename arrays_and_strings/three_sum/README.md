@@ -17,6 +17,6 @@ A solution set is:
 ]
 ```
 
-Companies [`Facebook`]
+Companies [`Facebook`, `Google`]
 
 Source `Leetcode` - https://leetcode.com/explore/interview/card/facebook/5/array-and-strings/283/
