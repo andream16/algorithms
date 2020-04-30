@@ -2,45 +2,32 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
 func licenseKeyFormatting(S string, K int) string {
 	if K == 0 {
 		return ""
 	}
-
 	var (
-		res   = ""
-		s     = filterDashes(S)
-		start = 0
+		s       string
+		counter int
 	)
-
-	if r := len(s) % K; r != 0 {
-		start = r
-		res += s[:r]
-		if len(s) > 1 {
-			res += "-"
+	for i := len(S) - 1; i >= 0; i-- {
+		if S[i] == '-' {
+			continue
 		}
-	}
-
-	for i := start; i < len(s); i += K {
-		res += s[i : i+K]
-		if i+K < len(s) {
-			res += "-"
+		if counter == K {
+			s = "-" + s
+			counter = 0
 		}
-	}
-	return res
-}
-
-func filterDashes(s string) string {
-	var res string
-	for _, c := range s {
-		if c != '-' {
-			res += strings.ToUpper(string(c))
+		counter++
+		if S[i] >= 'a' && S[i] <= 'z' {
+			s = string(S[i]-32) + s
+			continue
 		}
+		s = string(S[i]) + s
 	}
-	return res
+	return s
 }
 
 // Input: S = "5F3Z-2e-9-w", K = 4
