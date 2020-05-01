@@ -11,29 +11,22 @@ import (
 // S: O(N)
 func merge(intervals [][]int) [][]int {
 
-	var (
-		curr  int
-		found bool
-	)
+	var found = true
 
-	for curr < len(intervals)-1 {
-		currMin, currMax := findMinMax(intervals[curr])
-		for i := curr + 1; i < len(intervals); i++ {
-			nextMin, nextMax := findMinMax(intervals[i])
-			if min, max, overlap := overlaps(currMin, nextMin, currMax, nextMax); overlap {
-				intervals[curr] = []int{min, max}
-				intervals = append(intervals[:i], intervals[i+1:]...)
-				found = true
-				break
+	for found {
+		found = false
+		for i := 0; i < len(intervals)-1; i++ {
+			currMin, currMax := findMinMax(intervals[i])
+			for j := i + 1; j < len(intervals); j++ {
+				nextMin, nextMax := findMinMax(intervals[j])
+				if min, max, overlap := overlaps(currMin, nextMin, currMax, nextMax); overlap {
+					intervals[i] = []int{min, max}
+					intervals = append(intervals[:j], intervals[j+1:]...)
+					found = true
+					break
+				}
 			}
 		}
-		if found {
-			found = false
-			curr = 0
-		} else {
-			curr++
-		}
-
 	}
 
 	return intervals
@@ -41,8 +34,15 @@ func merge(intervals [][]int) [][]int {
 }
 
 func overlaps(min1, min2, max1, max2 int) (int, int, bool) {
-	min, max := findMinMax([]int{min1, min2, max1, max2})
-	return min, max, min1 <= max2 && min2 <= max1
+	min, max := min1, max2
+	if min1 > min2 {
+		min = min2
+	}
+	if max1 > max2 {
+		max = max1
+	}
+	// reverse for when they don't overlap
+	return min, max, max1 >= min2 && max2 >= min1
 }
 
 func findMinMax(arr []int) (int, int) {
