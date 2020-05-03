@@ -2,83 +2,35 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
-type Value struct {
-	tile  string
-	count int
-	value int
-	valid bool
+func minDominoRotations(A []int, B []int) int {
+	r := rotations(A[0], A, B)
+	if -1 != r || A[0] == B[0] {
+		return r
+	}
+	return rotations(B[0], A, B)
 }
 
-type ByCount []Value
-
-func (b ByCount) Len() int           { return len(b) }
-func (b ByCount) Swap(i, j int)      { b[i], b[j] = b[j], b[i] }
-func (b ByCount) Less(i, j int) bool { return b[i].count > b[j].count }
-
-// TODO check again
-func minDominoRotations(A []int, B []int) int {
-
-	const (
-		tileA = "A"
-		tileB = "B"
-	)
-
-	var (
-		sortedValues     []Value
-		aValues, bValues = map[int]int{}, map[int]int{}
-		validValues      = map[int]bool{}
-	)
-
-	for i, a := range A {
-		aCount, _ := aValues[a]
-		aCount++
-		aValues[a] = aCount
-		sortedValues = append(sortedValues, Value{
-			tile:  tileA,
-			count: aCount,
-			value: a,
-			valid: validValues[i],
-		})
-	}
-
-	for i, b := range B {
-		bCount, _ := bValues[b]
-		bCount++
-		bValues[b] = bCount
-		sortedValues = append(sortedValues, Value{
-			tile:  tileB,
-			count: bCount,
-			value: b,
-			valid: B[i] != A[i],
-		})
-	}
-
-	sort.Sort(ByCount(sortedValues))
-
-	for _, v := range sortedValues {
-		switch v.tile {
-		case tileA:
-			vb, ok := bValues[v.value]
-			if ok {
-				if r := len(A) - v.count; vb >= r {
-					return r
-				}
-			}
-		case tileB:
-			va, ok := aValues[v.value]
-			if ok {
-				if r := len(B) - v.count; va >= r {
-					return r
-				}
-			}
+func rotations(n int, A, B []int) int {
+	rotationsA, rotationsB := 0, 0
+	for i := 0; i < len(A); i++ {
+		if n != A[i] && n != B[i] {
+			return -1
+		} else if n != A[i] {
+			rotationsA++
+		} else if n != B[i] {
+			rotationsB++
 		}
 	}
+	return min(rotationsA, rotationsB)
+}
 
-	return -1
-
+func min(n1, n2 int) int {
+	if n1 < n2 {
+		return n1
+	}
+	return n2
 }
 
 func main() {
