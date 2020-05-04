@@ -17,8 +17,12 @@ func Constructor(sentences []string, times []int) AutocompleteSystem {
 	}
 }
 
-// TODO finish for next searches.
 func (this *AutocompleteSystem) Input(c byte) []string {
+	if c == '#' {
+		this.trie.addOrUpdateSentence(this.history)
+		this.history = []rune{}
+		return make([]string, 0)
+	}
 	this.history = append(this.history, rune(c))
 	return this.trie.lookup(this.history)
 }
@@ -43,7 +47,7 @@ func (b ByHotness) Len() int      { return len(b) }
 func (b ByHotness) Swap(i, j int) { b[i], b[j] = b[j], b[i] }
 func (b ByHotness) Less(i, j int) bool {
 	if b[i].hotness == b[j].hotness {
-		for k := 0; k < len(b[k].val); k++ {
+		for k := 0; k < len(min(b[i].val, b[j].val)); k++ {
 			if b[i].val[k] == b[j].val[k] {
 				continue
 			}
@@ -51,6 +55,13 @@ func (b ByHotness) Less(i, j int) bool {
 		}
 	}
 	return b[i].hotness > b[j].hotness
+}
+
+func min(s1, s2 string) string {
+	if len(s1) > len(s2) {
+		return s2
+	}
+	return s1
 }
 
 func (t *TrieNode) lookup(pre []rune) []string {
@@ -70,11 +81,17 @@ func (t *TrieNode) lookup(pre []rune) []string {
 	}
 
 	if curr.isTerminal {
-		return []string{currWord}
-	} else {
-		for _, w := range curr.next {
-			hotSentences = append(hotSentences, getWords(w, currWord)...)
+		hotSentences = append(hotSentences, HotSentence{
+			val:     currWord,
+			hotness: curr.hotness,
+		})
+		if len(curr.next) == 0 {
+			return []string{currWord}
 		}
+	}
+
+	for _, w := range curr.next {
+		hotSentences = append(hotSentences, getWords(w, currWord)...)
 	}
 
 	sort.Sort(ByHotness(hotSentences))
@@ -87,6 +104,36 @@ func (t *TrieNode) lookup(pre []rune) []string {
 	}
 
 	return sentences
+}
+
+func (t *TrieNode) addOrUpdateSentence(sentence []rune) {
+
+	nextNode := *t
+
+	for i, c := range sentence {
+		node, ok := nextNode.next[c]
+		if ok {
+			if node.isTerminal && len(node.next) == 0 {
+				node.hotness++
+			}
+			nextNode = *node
+			continue
+		} else {
+			node = &TrieNode{}
+		}
+		node.val = c
+		node.next = map[rune]*TrieNode{}
+		node.strVal = string(c)
+
+		if i == len(sentence)-1 {
+			node.isTerminal = true
+			node.hotness = 1
+		}
+
+		nextNode.next[c] = node
+		nextNode = *node
+	}
+
 }
 
 func getWords(node *TrieNode, prefix string) []HotSentence {
@@ -112,6 +159,10 @@ func buildTrie(sentences []string, hotness []int) *TrieNode {
 		for j, c := range s {
 			node, ok := nextNode.next[c]
 			if ok {
+				if j == len(s)-1 {
+					node.isTerminal = true
+					node.hotness = hotness[i]
+				}
 				nextNode = node
 				continue
 			} else {
@@ -136,12 +187,24 @@ func buildTrie(sentences []string, hotness []int) *TrieNode {
 }
 
 func main() {
-	autoComplete := Constructor([]string{"i love you", "island", "ironman", "i love leetcode"}, []int{5, 3, 2, 2})
-	fmt.Println(autoComplete.Input('i')) // ["i love you", "island","i love leetcode"]
-	fmt.Println(autoComplete.Input(' ')) // ["i love you", "i love leetcode"]
-	fmt.Println(autoComplete.Input('a')) // []
+
+	// ["AutocompleteSystem","input","input","input","input","input","input","input","input","input","input","input","input"]
+	//[[["i love you","island","iroman","i love leetcode"],[5,3,2,2]],["i"],[" "],["a"],["#"],["i"],[" "],["a"],["#"],["i"],[" "],["a"],["#"]]
+
+	autoComplete := Constructor([]string{"abc", "abbc", "a"}, []int{3, 3, 3})
+	fmt.Println(autoComplete.Input('b')) // []
+	fmt.Println(autoComplete.Input('c')) // []
+	fmt.Println(autoComplete.Input('#')) // []
+	fmt.Println(autoComplete.Input('b')) // ["bc"]
+	fmt.Println(autoComplete.Input('c')) // ["bc"]
+	fmt.Println(autoComplete.Input('#')) // []
+	fmt.Println(autoComplete.Input('a')) // ["a", "abbc", "abc"]
+	fmt.Println(autoComplete.Input('b')) // ["abbc", "abc"]
+	fmt.Println(autoComplete.Input('c')) // ["abc"]
+	fmt.Println(autoComplete.Input('#')) // []
+	fmt.Println(autoComplete.Input('a')) // ["abc", "a", "abbc"]
+	fmt.Println(autoComplete.Input('b')) // ["abc", "abbc"]
+	fmt.Println(autoComplete.Input('c')) // ["abc"]
 	fmt.Println(autoComplete.Input('#')) // []
 
-	//trie := buildTrie([]string{"i love you", "island", "ironman", "i love leetcode"}, []int{5, 3, 2, 2})
-	//fmt.Println(trie.lookup([]rune{'i'}))
 }
