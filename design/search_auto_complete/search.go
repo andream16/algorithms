@@ -7,33 +7,14 @@ import (
 
 type AutocompleteSystem struct {
 	trie    *TrieNode
-	history []rune
-}
-
-func Constructor(sentences []string, times []int) AutocompleteSystem {
-	return AutocompleteSystem{
-		trie:    buildTrie(sentences, times),
-		history: []rune{},
-	}
-}
-
-func (this *AutocompleteSystem) Input(c byte) []string {
-	if c == '#' {
-		this.trie.addOrUpdateSentence(this.history)
-		this.history = []rune{}
-		return make([]string, 0)
-	}
-	this.history = append(this.history, rune(c))
-	return this.trie.lookup(this.history)
+	history string
 }
 
 type TrieNode struct {
-	isRoot     bool
-	isTerminal bool
-	val        rune
-	strVal     string
-	next       map[rune]*TrieNode
-	hotness    int
+	isWord   bool
+	val      rune
+	children map[rune]*TrieNode
+	hotness  int
 }
 
 type HotSentence struct {
@@ -43,55 +24,86 @@ type HotSentence struct {
 
 type ByHotness []HotSentence
 
+type QueueNode struct {
+	node *TrieNode
+	prefix string
+}
+
+type Queue struct {
+	nodes []*QueueNode
+}
+
+func Constructor(sentences []string, times []int) AutocompleteSystem {
+	trieNode := TrieNode{
+		children: map[rune]*TrieNode{},
+	}
+	for i, s := range sentences {
+		trieNode.upsert(s, times[i])
+	}
+	return AutocompleteSystem{
+		trie: &trieNode,
+	}
+}
+
+func (this *AutocompleteSystem) Input(c byte) []string {
+	if c == '#' {
+		this.trie.upsert(this.history, 1)
+		this.history = ""
+		return make([]string, 0)
+	}
+	this.history += string(c)
+	return this.trie.lookup(this.history)
+}
+
 func (b ByHotness) Len() int      { return len(b) }
 func (b ByHotness) Swap(i, j int) { b[i], b[j] = b[j], b[i] }
 func (b ByHotness) Less(i, j int) bool {
 	if b[i].hotness == b[j].hotness {
-		for k := 0; k < len(min(b[i].val, b[j].val)); k++ {
-			if b[i].val[k] == b[j].val[k] {
-				continue
-			}
-			return b[i].val[k] < b[j].val[k]
-		}
+		return b[i].val < b[j].val
 	}
 	return b[i].hotness > b[j].hotness
 }
 
-func min(s1, s2 string) string {
-	if len(s1) > len(s2) {
-		return s2
-	}
-	return s1
-}
+func (t *TrieNode) lookup(prefix string) []string {
 
-func (t *TrieNode) lookup(pre []rune) []string {
 	var (
-		hotSentences = []HotSentence{}
-		sentences    = []string{}
 		curr         = *t
 		currWord     string
 	)
-	for _, c := range pre {
-		next, ok := curr.next[c]
+
+	for _, c := range prefix {
+		next, ok := curr.children[c]
 		if !ok {
-			return nil
+			return make([]string, 0)
 		}
 		currWord += string(c)
 		curr = *next
 	}
 
-	if curr.isTerminal {
-		hotSentences = append(hotSentences, HotSentence{
-			val:     currWord,
-			hotness: curr.hotness,
-		})
-		if len(curr.next) == 0 {
-			return []string{currWord}
+	var (
+		hotSentences []HotSentence
+		sentences    []string
+	)
+	
+	q := &Queue{}
+	q.enqueue(&QueueNode{
+		node:   &curr,
+	})
+	
+	for !q.empty() {
+		n := q.dequeue()
+		if n.node.isWord {
+			hotSentences = append(hotSentences, HotSentence{
+				val:     prefix + n.prefix,
+				hotness: n.node.hotness,
+			})
 		}
-	}
-
-	for _, w := range curr.next {
-		hotSentences = append(hotSentences, getWords(w, currWord)...)
+		for _, child := range n.node.children {
+			q.enqueue(&QueueNode{
+				node:   child,
+				prefix: n.prefix + string(child.val),
+			})
+		}
 	}
 
 	sort.Sort(ByHotness(hotSentences))
@@ -106,84 +118,49 @@ func (t *TrieNode) lookup(pre []rune) []string {
 	return sentences
 }
 
-func (t *TrieNode) addOrUpdateSentence(sentence []rune) {
+func (t *TrieNode) upsert(sentence string, hotness int) {
 
-	nextNode := *t
+	curr := t
 
 	for i, c := range sentence {
-		node, ok := nextNode.next[c]
+		var nextNode *TrieNode
+		node, ok := curr.children[c]
 		if ok {
-			if node.isTerminal && len(node.next) == 0 {
-				node.hotness++
-			}
-			nextNode = *node
-			continue
+			nextNode = node
 		} else {
-			node = &TrieNode{}
+			nextNode = &TrieNode{
+				val:      c,
+				children: map[rune]*TrieNode{},
+			}
 		}
-		node.val = c
-		node.next = map[rune]*TrieNode{}
-		node.strVal = string(c)
 
 		if i == len(sentence)-1 {
-			node.isTerminal = true
-			node.hotness = 1
-		}
-
-		nextNode.next[c] = node
-		nextNode = *node
-	}
-
-}
-
-func getWords(node *TrieNode, prefix string) []HotSentence {
-	prefix += string(node.val)
-	if node.isTerminal {
-		return []HotSentence{{val: prefix, hotness: node.hotness}}
-	}
-	hotSentences := []HotSentence{}
-	for _, next := range node.next {
-		hotSentences = append(hotSentences, getWords(next, prefix)...)
-	}
-	return hotSentences
-}
-
-func buildTrie(sentences []string, hotness []int) *TrieNode {
-	trieNode := TrieNode{
-		isRoot: true,
-		next:   map[rune]*TrieNode{},
-	}
-
-	for i, s := range sentences {
-		nextNode := &trieNode
-		for j, c := range s {
-			node, ok := nextNode.next[c]
-			if ok {
-				if j == len(s)-1 {
-					node.isTerminal = true
-					node.hotness = hotness[i]
-				}
-				nextNode = node
-				continue
+			nextNode.isWord = true
+			if nextNode.hotness == 0 {
+				nextNode.hotness = hotness
 			} else {
-				node = &TrieNode{}
+				nextNode.hotness++
 			}
-
-			node.val = c
-			node.next = map[rune]*TrieNode{}
-			node.strVal = string(c)
-
-			if j == len(s)-1 {
-				node.isTerminal = true
-				node.hotness = hotness[i]
-			}
-
-			nextNode.next[c] = node
-			nextNode = node
 		}
+
+		curr.children[c] = nextNode
+		curr = nextNode
 	}
 
-	return &trieNode
+}
+
+func (q *Queue) enqueue(node *QueueNode) {
+	q.nodes = append(q.nodes, node)
+}
+
+func (q *Queue) dequeue() *QueueNode {
+	node := q.nodes[0]
+	q.nodes = q.nodes[1:]
+	return node
+}
+
+func (q *Queue) empty() bool {
+	return len(q.nodes) == 0
 }
 
 func main() {
