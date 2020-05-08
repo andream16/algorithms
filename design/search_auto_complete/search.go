@@ -25,7 +25,7 @@ type HotSentence struct {
 type ByHotness []HotSentence
 
 type QueueNode struct {
-	node *TrieNode
+	node   *TrieNode
 	prefix string
 }
 
@@ -33,6 +33,8 @@ type Queue struct {
 	nodes []*QueueNode
 }
 
+// T: O(sentence*letters)
+// S: (sentences*letters*children)
 func Constructor(sentences []string, times []int) AutocompleteSystem {
 	trieNode := TrieNode{
 		children: map[rune]*TrieNode{},
@@ -45,6 +47,7 @@ func Constructor(sentences []string, times []int) AutocompleteSystem {
 	}
 }
 
+// T: O(prefix + (children*letters) + matches(log matches))
 func (this *AutocompleteSystem) Input(c byte) []string {
 	if c == '#' {
 		this.trie.upsert(this.history, 1)
@@ -67,8 +70,8 @@ func (b ByHotness) Less(i, j int) bool {
 func (t *TrieNode) lookup(prefix string) []string {
 
 	var (
-		curr         = *t
-		currWord     string
+		curr     = *t
+		currWord string
 	)
 
 	for _, c := range prefix {
@@ -84,12 +87,12 @@ func (t *TrieNode) lookup(prefix string) []string {
 		hotSentences []HotSentence
 		sentences    []string
 	)
-	
+
 	q := &Queue{}
 	q.enqueue(&QueueNode{
-		node:   &curr,
+		node: &curr,
 	})
-	
+
 	for !q.empty() {
 		n := q.dequeue()
 		if n.node.isWord {

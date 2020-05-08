@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+// T: O(n)
+// S: O(1)
 func checkStraightLine(coordinates [][]int) bool {
 	switch len(coordinates) {
 	case 0, 1:
