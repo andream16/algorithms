@@ -1,0 +1,10 @@
+-- LIMIT 1,1 MEANS OFFSET 1, PICK FIRST.
+-- DISTINCT MAKES SURE TO SKIP THE CASE WHERE FIRST AND SECOND ROWS HAVE THE SAME SALARY.
+SELECT
+    (SELECT DISTINCT
+            Salary
+        FROM
+            Employee
+        ORDER BY Salary DESC
+        LIMIT 1,1
+) AS SecondHighestSalary;
