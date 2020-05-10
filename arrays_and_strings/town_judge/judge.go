@@ -2,25 +2,28 @@ package main
 
 import "fmt"
 
-// T: O(n) + O(n)
-// S: O(n) + O(n*n-1)
+// The problem can be approached like a graph problem. An edge E is identified by a trust pair.
+// We have a judge when the number of indegree edges = N - 1. So, this vertex will have all nodes
+// going into it except one. We decrease the count when we have an outgoing edge and increase when we have an
+// incoming one.
+//
+// T: O(e)
+// S: O(n)
 func findJudge(N int, trust [][]int) int {
 	if N <= 1 {
 		return N
 	}
-	citizens, judges := make(map[int]struct{}, N), make(map[int]map[int]struct{}, N)
+
+	citizenScores := make(map[int]int, N)
+
 	for _, t := range trust {
-		_, ok := judges[t[1]]
-		if !ok {
-			judges[t[1]] = map[int]struct{}{}
-		}
-		judges[t[1]][t[0]] = struct{}{}
-		citizens[t[0]] = struct{}{}
+		citizenScores[t[0]]--
+		citizenScores[t[1]]++
 	}
 
-	for j, c := range judges {
-		if _, ok := citizens[j]; !ok && len(c) == N-1 {
-			return j
+	for citizen, score := range citizenScores {
+		if score == N - 1 {
+			return citizen
 		}
 	}
 
