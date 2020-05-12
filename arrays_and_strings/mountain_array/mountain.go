@@ -6,30 +6,30 @@ import "fmt"
 // S: O(n)
 
 // There's only one exception in case the array has length 3.
-// In all the other cases, until we find the peek, point where A[i-1] < A[i] > A[i+1], we check for each element
-// to be greater than the previous A[i] > A[i-1]. When instead we find the peek, we need to check that each element
+// In all the other cases, until we find the peak, point where A[i-1] < A[i] > A[i+1], we check for each element
+// to be greater than the previous A[i] > A[i-1]. When instead we find the peak, we need to check that each element
 // is smaller than the previous one A[i] < A[i-1].
 func validMountainArray(A []int) bool {
 	if len(A) < 3 {
 		return false
 	}
 
-	var peekIndex = -1
+	var peakIndex = -1
 
 	for i := 1; i <= len(A)-1; i++ {
 		if i < len(A)-1 && A[i-1] < A[i] && A[i] > A[i+1] {
-			if peekIndex > 0 {
+			if peakIndex > 0 {
 				return false
 			}
-			peekIndex = i
+			peakIndex = i
 			continue
 		}
-		if (peekIndex < 0 && A[i-1] >= A[i]) || (peekIndex > 0 && A[i-1] <= A[i]) {
+		if (peakIndex < 0 && A[i-1] >= A[i]) || (peakIndex > 0 && A[i-1] <= A[i]) {
 			return false
 		}
 	}
 
-	if peekIndex == -1 {
+	if peakIndex == -1 {
 		return false
 	}
 
