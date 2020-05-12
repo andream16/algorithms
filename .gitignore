@@ -2,3 +2,4 @@
 venv/
 out/
 algorithms.iml
+.vscode
