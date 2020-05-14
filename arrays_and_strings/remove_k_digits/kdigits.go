@@ -19,6 +19,7 @@ func removeKdigits(num string, k int) string {
 
 	// we are using str like a stack.
 	for _, c := range num {
+		// keep removing until k > 0 and the criteria matches.
 		for k > 0 && str != "" && int(str[len(str)-1]-'0') > int(c-'0') {
 			str = str[:len(str)-1]
 			k--
