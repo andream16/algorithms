@@ -10,8 +10,9 @@ func findMissingRanges(nums []int, lower int, upper int) []string {
 		}
 		return []string{fmt.Sprintf("%d->%d", lower, upper)}
 	}
+
 	var rng []string
-	for i:=1; i<len(nums); i++ {
+	for i := 1; i < len(nums); i++ {
 		low, high := nums[i-1]+1, nums[i]-1
 		if low == high {
 			rng = append(rng, fmt.Sprintf("%d", low))
