@@ -38,7 +38,7 @@ func getNext(n int) int {
 // - d = 1 % 10 = 1; n = 1 / 10 = 0; next += d * d = 82
 //
 // T: O(log n)
-// S: O(1)
+// S: O(log n)
 func isHappyBasic(n int) bool {
 	var (
 		seen = map[int]struct{}{}
