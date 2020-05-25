@@ -1,16 +1,17 @@
-Given three integer arrays arr1, arr2 and arr3 sorted in strictly increasing order, return a sorted array of only the integers that appeared in all three arrays.
+Given two sorted integer arrays `nums1` and `nums2`, merge `nums2` into `nums1` as one sorted array.
 
-Example 1:
+Note:
 
-- Input: `arr1 = [1,2,3,4,5]`, `arr2 = [1,2,5,7,9]`, `arr3 = [1,3,4,5,8]`
-- Output: `[1,5]`
-- Explanation: Only 1 and 5 appeared in the three arrays.
- 
-Constraints:
+The number of elements initialized in `nums1` and `nums2` are `m` and `n` respectively.
+You may assume that nums1 has enough space (size that is greater or equal to `m + n`) to hold additional elements from `nums2`.
 
-- `1 <= arr1.length`, `arr2.length`, `arr3.length <= 1000`
-- `1 <= arr1[i]`, `arr2[i]`, `arr3[i] <= 2000`
+Example:
 
-Companies [`Facebook`]
+- Input: `nums1 = [1,2,3,0,0,0]`, `m = 3`, `nums2 = [2,5,6]`, `n = 3`
+- Output: `[1,2,2,3,5,6]`
 
-Source `Leetcode` - https://leetcode.com/problems/intersection-of-three-sorted-arrays/
+Tags: [`Top 100 Questions`]
+
+Companies [`Facebook`, `Apple`, `Amazon`, `Microsoft`, `LinkedIn`, `Oracle`, `Bloomberg`, `Lyft`, `Yandex`, `IBM`]
+
+Source `Leetcode` - https://leetcode.com/problems/merge-sorted-array/

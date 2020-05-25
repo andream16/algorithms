@@ -1,40 +1,21 @@
-package main
+package mergesortedarrays
 
-import "fmt"
+// As we know that len(nums1) == n+m, we can start from the last elements of each array and compare them.
+// nums1[i+j+1] is nums1[i] is this is bigger than nums2[j], else, it's nums2[j].
+// We decrease i and j, respectively, when needed.
+//
+// T: O(n+m)
+// S: O(1)
+func merge(nums1 []int, m int, nums2 []int, n int) {
 
-func arraysIntersection(arr1 []int, arr2 []int, arr3 []int) []int {
-
-	res := []int{}
-	seen1, seen2 := map[int]struct{}{}, map[int]struct{}{}
-
-	for _, a1 := range arr1 {
-		seen1[a1] = struct{}{}
-	}
-
-	for _, a2 := range arr2 {
-		_, ok := seen1[a2]
-		if !ok {
+	for i, j := m-1, n-1; j >= 0; {
+		if i >= 0 && nums1[i] > nums2[j] {
+			nums1[i+j+1] = nums1[i]
+			i--
 			continue
 		}
-		seen2[a2] = struct{}{}
-		for idx, a3 := range arr3 {
-			_, ok1 := seen1[a3]
-			_, ok2 := seen2[a3]
-			if ok1 && ok2 {
-				res = append(res, a3)
-				arr3 = append(arr3[:idx], arr3[idx+1:]...)
-				break
-			}
-		}
+		nums1[i+j+1] = nums2[j]
+		j--
 	}
 
-	return res
-
-}
-
-func main() {
-
-	a1, a2, a3 := []int{1, 2, 3, 4, 5}, []int{1, 2, 5, 7, 9}, []int{1, 3, 4, 5, 8}
-
-	fmt.Println(arraysIntersection(a1, a2, a3))
 }
