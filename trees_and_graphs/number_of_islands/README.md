@@ -2,7 +2,7 @@ Given a 2d grid map of '1's (land) and '0's (water), count the number of islands
 
 Example 1:
 
-Input:
+- Input:
 ```
 11110
 11010
@@ -10,11 +10,11 @@ Input:
 00000
 ```
 
-Output: `1`
+- Output: `1`
 
 Example 2:
 
-Input:
+- Input:
 
 ```
 11000
@@ -23,7 +23,11 @@ Input:
 00011
 ```
 
-Output: `3`
+- Output: `3`
 
-Companies [`Facebook`]
-Source `Leetcode` - https://leetcode.com/explore/interview/card/facebook/52/trees-and-graphs/274/
+Tags: [`Top 100 Questions`]
+
+Companies [`Amazon`, `Bloomberg`, `Microsoft`, `Facebook`, `Oracle`, `Google`, `Apple`, `Goldman Sachs`, `Uber`, 
+`Tableau`, `Adobe`, `Walmart Labs`, `Evernote`, `Yahoo`, `Salesforce`, `Mathworks`, `Audible`]
+
+Source `Leetcode` - https://leetcode.com/problems/number-of-islands/

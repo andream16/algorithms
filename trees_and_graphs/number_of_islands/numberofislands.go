@@ -1,77 +1,60 @@
-package main
+package island
 
 import (
 	"fmt"
-	"math"
 )
 
-type island struct {
+type cell struct {
 	x int
 	y int
 }
 
+// To solve this problem, we can hold the visited lands into a set and use BFS to form the islands.
+// If a cell is a land and we haven't visited it, use BFS by adding it into a queue and keep adding to the queue all the
+// adjacent lands. Every time we do this, it means that we found a new island.
+//
+// T: O(r x c) where r is the number of rows and c is the number of columns.
+// S: O(r x c) as in the worst case the queue can contain all the elements.
 func numIslands(grid [][]byte) int {
-	var islands [][]island
+	var (
+		visited  = map[string]struct{}{}
+		nIslands int
+	)
 
 	for i := 0; i < len(grid); i++ {
-		for j := 0; j < len(grid[0]); j++ {
-			if grid[i][j] == '0' {
+		for j := 0; j < len(grid[i]); j++ {
+			cellName := toCell(i, j)
+			if _, ok := visited[cellName]; ok || grid[i][j] == '0' {
 				continue
 			}
-			addToIslands(i, j, &islands)
+			bfs(i, j, grid, visited)
+			nIslands++
 		}
 	}
 
-	return len(islands)
+	return nIslands
 }
 
-// T: BFS O(N*|islands*|land||) -> O(N*I*L)
-// S: |islands*lands|
-func addToIslands(x, y int, islands *[][]island) {
-	var boundaries []int
-	for idx, isl := range *islands {
-		for _, i := range isl {
-			dx, dy := int(math.Abs(float64(i.x-x))), int(math.Abs(float64(i.y-y)))
-			if dx == 0 && dy <= 1 || dx <= 1 && dy == 0 {
-				boundaries = append(boundaries, idx)
-				(*islands)[idx] = append((*islands)[idx], island{x: x, y: y})
-				break
-			}
-		}
-	}
-	if len(boundaries) > 0 {
-		if len(boundaries) > 1 {
-			var resIsl []island
-			for _, b := range boundaries {
-				for _, isl := range (*islands)[b] {
-					resIsl = append(resIsl, isl)
+func bfs(i, j int, grid [][]byte, visited map[string]struct{}) {
+	var queue []cell
+	queue = append(queue, cell{x: i, y: j})
+	for len(queue) != 0 {
+		c := queue[0]
+		queue = queue[1:]
+		for _, d := range [][]int{{1, 0}, {0, -1}, {-1, 0}, {0, 1}} {
+			x, y := c.x+d[0], c.y+d[1]
+			if x >= 0 && x < len(grid) && y >= 0 && y < len(grid[i]) {
+				cellName := toCell(x, y)
+				if _, ok := visited[cellName]; ok || grid[x][y] == '0' {
+					continue
 				}
-				*(islands) = append(append([][]island{}, (*islands)[b]), (*islands)[b+1:]...)
+				visited[cellName] = struct{}{}
+				queue = append(queue, cell{x: x, y: y})
 			}
-			(*islands)[boundaries[0]] = resIsl
-			return
 		}
-		return
 	}
-	*islands = append(*islands, []island{{x: x, y: y}})
 }
 
-func main() {
-	fmt.Println(numIslands([][]byte{
-		{'1', '1', '0', '0', '0'},
-		{'1', '1', '0', '0', '0'},
-		{'0', '0', '1', '0', '0'},
-		{'0', '0', '0', '1', '1'},
-	}))
-	fmt.Println(numIslands([][]byte{
-		{'1', '1', '1', '1', '0'},
-		{'1', '1', '0', '1', '0'},
-		{'1', '1', '0', '0', '0'},
-		{'0', '0', '0', '0', '0'},
-	}))
-	fmt.Println(numIslands([][]byte{
-		{'1', '1', '1'},
-		{'0', '1', '0'},
-		{'1', '1', '1'},
-	}))
+func toCell(x, y int) string {
+	return fmt.Sprintf("%d,%d", x, y)
 }
