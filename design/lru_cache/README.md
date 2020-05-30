@@ -24,6 +24,9 @@ cache.get(3);       // returns 3
 cache.get(4);       // returns 4
 ```
 
-Companies [`Facebook`]
+Tags: [`Top 100 Questions`]
+
+Companies [`Amazon`, `Apple`, `Microsoft`, `Facebook`, `Bloomberg`, `VMWare`, `Oracle`, `Snapchat`, `Dropbox`, 
+`ByteDance`, `Google`, `eBay`, `Roblox`, `Uber`, `Salesforce`, `Zillow`, `Intuit`, `Twilio`, `Two Sigma`, `Cisco`]
 
 Source `Leetcode` - https://leetcode.com/explore/interview/card/facebook/56/design-3/311/
