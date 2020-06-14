@@ -1,10 +1,9 @@
-package main
+package sub
 
-import (
-	"fmt"
-	"math"
-)
-
+// To solve this problem, we rely on updating the current value only if its value would increase by adding its previous
+// one. On every iteration, we update the maximum subarray sum by checking if the current one is bigger than the
+// temporary maximum. This problem is using Kadane's Algorithm.
+//
 // T: O(n)
 // S: O(1)
 func maxSubArray(nums []int) int {
@@ -26,32 +25,4 @@ func max(n1, n2 int) int {
 		return n1
 	}
 	return n2
-}
-
-// T: O(n^2)
-// S: 1
-func naiveMaxSubArray(nums []int) int {
-	maxSum := math.MinInt64
-
-	for i := 0; i < len(nums); i++ {
-		currSum := 0
-		for j := i; j < len(nums); j++ {
-			currSum += nums[j]
-			if maxSum < currSum {
-				maxSum = currSum
-			}
-		}
-	}
-
-	return maxSum
-}
-
-func main() {
-	fmt.Println(maxSubArray([]int{-2, 1, -3, 4, -1, 2, 1, -5, 4})) // 6
-	fmt.Println(maxSubArray([]int{1}))                             // 1
-	fmt.Println(maxSubArray([]int{1, 2}))                          // 3
-	fmt.Println(maxSubArray([]int{-1, 0, -2}))                     // 0
-	fmt.Println(maxSubArray([]int{-2, -1}))                        // -1
-	fmt.Println(maxSubArray([]int{-1, -2}))                        // -1
-	fmt.Println(maxSubArray([]int{-2, -3, -1}))                    // -1
 }

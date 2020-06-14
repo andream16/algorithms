@@ -8,8 +8,11 @@ Example:
 
 Follow up:
 
-If you have figured out the `O(n)` solution, try coding another solution using the divide and conquer approach, which is more subtle.
+- If you have figured out the `O(n)` solution, try coding another solution using the divide and conquer approach, which is more subtle.
 
-Companies [`Google`]
+Tags: [`Top 100 Questions`]
 
-Source `Leetcode` - https://leetcode.com/explore/interview/card/google/64/dynamic-programming-4/3085/
+Companies [`Amazon`, `Apple`, `Microsoft`, `Facebook`, `Google`, `Bloomberg`, `LikedIn`, `Cisco`, `Adobe`, `Oracle`,
+`Capital One`, `Uber`, `Paypal`, `ByteDance`]
+
+Source `Leetcode` - https://leetcode.com/problems/maximum-subarray/

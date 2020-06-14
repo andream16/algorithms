@@ -2,7 +2,7 @@ Given an array nums of n integers, are there elements a, b, c in nums such that 
 
 Note:
 
-The solution set must not contain duplicate triplets.
+- The solution set must not contain duplicate triplets.
 
 Example:
 
@@ -17,6 +17,9 @@ A solution set is:
 ]
 ```
 
-Companies [`Facebook`, `Google`]
+Tags: [`Top 100 Questions`]
 
-Source `Leetcode` - https://leetcode.com/explore/interview/card/facebook/5/array-and-strings/283/
+Companies [`Amazon`, `Facebook`, `Microsoft`, `Google`, `Apple`, `Adobe`, `Bloomberg`, `Mathworks`, `Oracle`, `Paypal`
+`Citrix`, `Citadel`]
+
+Source `Leetcode` - https://leetcode.com/problems/3sum/solution/
