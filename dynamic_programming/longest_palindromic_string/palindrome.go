@@ -1,5 +1,13 @@
-package main
+package longestpalindrome
 
+// For each character, we expand from its center to its left & right.
+// We keep expanding until we reach the beginning/end of the string or s[left] != s[right].
+// Every time we finish analysing one character, we check if the given palindrome is the longest and in case we
+// update the answer.
+// We check for odd and even length palindromes.
+//
+// T: O(n^2)
+// O: O(1)
 func longestPalindrome(s string) string {
 	longest := ""
 
@@ -11,9 +19,7 @@ func longestPalindrome(s string) string {
 		// Example:
 		// "aba" -> odd number
 		// "abba" -> even number
-		odd := expandAndCount(s, i, i)
-
-		even := expandAndCount(s, i, i+1)
+		odd, even := expandAndCount(s, i, i), expandAndCount(s, i, i+1)
 
 		// Get the longest string by comparing
 		longer := ""
@@ -28,7 +34,6 @@ func longestPalindrome(s string) string {
 		}
 	}
 
-	// That's it!
 	return longest
 }
 
@@ -41,9 +46,7 @@ func expandAndCount(s string, start, end int) string {
 		end += 1
 	}
 	// After getting the longest string, start will be added 1 and end will be minus 1 anyway,
-	// for slice, start need to be minues 1 and end is extactlly what we need
+	// for slice, start need to be minus 1 and end is exactly what we need
 	// so we get this:
 	return s[start+1 : end]
 }
-
-func main() {}

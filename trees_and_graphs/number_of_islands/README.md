@@ -25,9 +25,10 @@ Example 2:
 
 - Output: `3`
 
-Tags: [`Top 100 Questions`]
+[`Top 100 Questions`]
 
 Companies [`Amazon`, `Bloomberg`, `Microsoft`, `Facebook`, `Oracle`, `Google`, `Apple`, `Goldman Sachs`, `Uber`, 
-`Tableau`, `Adobe`, `Walmart Labs`, `Evernote`, `Yahoo`, `Salesforce`, `Mathworks`, `Audible`]
+`Goldman Sachs`, `Tableau`, `Adobe`, `Walmart Labs`, `Evernote`, `Yahoo`, `Salesforce`, `Mathworks`, `Audible`, 
+`Roblox`]
 
 Source `Leetcode` - https://leetcode.com/problems/number-of-islands/

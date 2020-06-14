@@ -7,6 +7,9 @@ Example:
 - Given `nums = [2, 7, 11, 15]`, `target = 9`,
 - Because `nums[0] + nums[1] = 2 + 7 = 9`, return `[0, 1]`.
 
+
+Tags: [`Top 100 Questions`]
+
 Companies [`Google`, `Amazon`, `Apple`, `Adobe`, `Facebook`, `Microsoft`, `Bloomberg`, `Uber`, `Cisco`, `Yahoo`, `Oracle`
 `Goldman Sachs`, `eBay`]
 

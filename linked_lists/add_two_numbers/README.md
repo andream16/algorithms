@@ -8,6 +8,9 @@ Example:
 - Output: `7 -> 0 -> 8`
 - Explanation:` 342 + 465 = 807`.
 
-Companies [`Facebook`]
+Tags: [`Top 100 Questions`]
+
+Companies [`Amazon`, `Bloomberg`, `Apple`, `Google`, `Facebook`, `Adobe`, `Uber`, `Yahoo`, `ServiceNow`, `Oracle`, 
+`VMWare`, `Saleforce`, `Paypal`]
 
 Source `Leetcode` - https://leetcode.com/problems/add-two-numbers/

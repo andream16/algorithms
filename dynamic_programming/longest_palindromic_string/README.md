@@ -10,6 +10,9 @@ Example 2:
 - Input: `"cbbd"`
 - Output: `"bb"`
 
-Companies [`Facebook`]
+Tags: [`Top 100 Questions`]
 
-Source `Leetcode` - https://leetcode.com/explore/interview/card/facebook/55/dynamic-programming-3/3034/
+Companies [`Amazon`, `Microsoft`, `Facebook`, `Cisco`, `Apple`, `Google`, `Bloomberg`, `Adobe`, `Oracle`, `eBay`,
+`Paypal`, `ServiceNow`]
+
+Source `Leetcode` - https://leetcode.com/problems/longest-palindromic-substring/

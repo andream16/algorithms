@@ -5,6 +5,9 @@ Example:
 - Input: `1->2->4`, `1->3->4`
 - Output: `1->1->2->3->4->4`
 
-Companies [`Facebook`]
+Tags: [`Top 100 Questions`]
+
+Companies [`Amazon`, `Microsoft`, `Adobe`, `Google`, `Facebook`, `Bloomberg`, `Apple`, `Oracle`, `Yandex`, `LinkedIn`,
+`VMWare`, `Yahoo`]
 
 Source `Leetcode` - https://leetcode.com/problems/merge-two-sorted-lists/

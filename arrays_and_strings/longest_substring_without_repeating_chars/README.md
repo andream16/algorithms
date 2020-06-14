@@ -20,6 +20,9 @@ Example 3:
 
 Note that the answer must be a substring, `"pwke"` is a subsequence and not a substring.
 
-Companies [`Facebook`, `Google`]
+Tags: [`Top 100 Questions`]
 
-Source `Leetcode` - https://leetcode.com/explore/interview/card/google/59/array-and-strings/3047/
+Companies [`Amazon`, `Facebook`, `Bloomberg`, `Apple`, `Microsoft`, `Adobe`, `Google`, `eBay`, `Uber`, `ByteDance`, 
+`VMWare`, `Yandex`, `Spotify`, `Cisco`, `Atlassian`, `Coupang`]
+
+Source `Leetcode` - https://leetcode.com/problems/longest-substring-without-repeating-characters/
