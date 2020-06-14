@@ -2,7 +2,7 @@ package parentheses
 
 // This problem can be solved using backtracking. We know that a string is valid if the number of ( is equal to the
 // number of ). The solution of this problem can be better understood using with a whiteboard. View the picture at
-// github.com/andream16/assets/images/22_generate_parentheses.jpg.
+// github.com/andream16/algorithms/blob/master/assets/images/22_generate_parentheses.jpg
 // Keep in mind `numOpen < max` for right branch and `numClose < numOpen` for left branch.
 //
 // T: O(b^d) where b is the branching factor and d is the depth.
