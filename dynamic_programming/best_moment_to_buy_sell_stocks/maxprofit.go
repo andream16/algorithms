@@ -1,10 +1,13 @@
-package main
+package maxprofit
 
 import (
-	"fmt"
 	"math"
 )
 
+// To solve this problem, we need the concepts of minimum price and maximum difference.
+// We iterate the prices and every time we find a price that is lower than the minimum encountered, we update the latter.
+// The most profitable day, is the day where the difference between the current price and the minimum is the greatest.
+//
 // T: O(n)
 // S: O(n)
 func maxProfit(prices []int) int {
@@ -13,20 +16,15 @@ func maxProfit(prices []int) int {
 		min = math.MaxInt64
 	)
 
-	for _, p := range prices {
-		if p < min {
-			min = p
+	for _, price := range prices {
+		if price < min {
+			min = price
 			continue
 		}
-		if diff := p - min; diff > max {
+		if diff := price - min; diff > max {
 			max = diff
 		}
 	}
 
 	return max
-}
-
-func main() {
-	fmt.Println(maxProfit([]int{7, 1, 5, 3, 6, 4}))    // 5
-	fmt.Println(maxProfit([]int{7, 6, 5, 4, 3, 2, 1})) // 0
 }

@@ -8,3 +8,9 @@ Example 1:
 Note:
 - The length of the array is in range `[1, 20,000]`.
 - The range of numbers in the array is `[-1000, 1000]` and the range of the integer k is `[-1e7, 1e7]`.
+
+Tags: [`Top 100 Questions`]
+
+Companies [`Facebook`,`Google`, `Amazon`, `Adobe`, `Goldman Sachs`, `Microsoft`, `Twilio`, `Yahoo`]
+
+Source `Leetcode` - https://leetcode.com/problems/best-time-to-buy-and-sell-stock/

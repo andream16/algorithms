@@ -14,6 +14,10 @@ Example 2:
 
 NOTE: input types have been changed on April 15, 2019. Please reset to default code definition to get new method signature.
 
-Companies [`Google`]
+Tags: [`Top 100 Questions`]
 
-Source `Leetcode` - https://leetcode.com/explore/interview/card/google/63/sorting-and-searching-4/450/
+Companies [`Facebook`, `Amazon`, `Google`, `Microsoft`, `Bloomberg`, `Oracle`, `Apple`, `Uber`, `Yandex`, `LinkedIn`,
+`ByteDance`, `Paypal`, `Cisco`, `Palantir`, `Salesforce`, `Adobe`, `Goldman Sachs`, `eBay`, `DoorDash`, `VMWare`, 
+`ServiceNow`, `Zulili`, `Twitch`, `Postmates`]
+
+Source `Leetcode` - https://leetcode.com/problems/merge-intervals/

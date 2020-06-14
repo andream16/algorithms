@@ -1,65 +1,37 @@
-package main
+package mergeintervals
 
 import (
-	"fmt"
-	"math"
+	"sort"
 )
 
-// TODO improve
-
-// T: O(N-1*((N*N-1)*N)
-// S: O(N)
+// We sort the intervals by their beginning. We add the first interval to the result array and we iterate the rest.
+// Since both input and result are sorted, we can merge the current interval with the last result if current interval
+// begins before the end of the last result. In the other cases we append a new interval to the result.
+//
+// T: O(n log n)
+// S: O(n)
 func merge(intervals [][]int) [][]int {
 
-	var found = true
+	if 0 == len(intervals) {
+		return make([][]int, 0)
+	}
 
-	for found {
-		found = false
-		for i := 0; i < len(intervals)-1; i++ {
-			currMin, currMax := findMinMax(intervals[i])
-			for j := i + 1; j < len(intervals); j++ {
-				nextMin, nextMax := findMinMax(intervals[j])
-				if min, max, overlap := overlaps(currMin, nextMin, currMax, nextMax); overlap {
-					intervals[i] = []int{min, max}
-					intervals = append(intervals[:j], intervals[j+1:]...)
-					found = true
-					break
-				}
-			}
+	var res [][]int
+
+	sort.Slice(intervals, func(i, j int) bool {
+		return intervals[i][0] < intervals[j][0]
+	})
+
+	res = append(res, intervals[0])
+
+	for i := 1; i < len(intervals); i++ {
+		lastResIdx := len(res) - 1
+		if intervals[i][0] > res[lastResIdx][1] {
+			res = append(res, intervals[i])
+		} else if res[lastResIdx][1] < intervals[i][1] {
+			res[lastResIdx][1] = intervals[i][1]
 		}
 	}
 
-	return intervals
-
-}
-
-func overlaps(min1, min2, max1, max2 int) (int, int, bool) {
-	min, max := min1, max2
-	if min1 > min2 {
-		min = min2
-	}
-	if max1 > max2 {
-		max = max1
-	}
-	// reverse for when they don't overlap
-	return min, max, max1 >= min2 && max2 >= min1
-}
-
-func findMinMax(arr []int) (int, int) {
-	min, max := math.MaxInt64, math.MinInt64
-	for _, n := range arr {
-		if n < min {
-			min = n
-		}
-		if n > max {
-			max = n
-		}
-	}
-	return min, max
-}
-
-func main() {
-	fmt.Println(merge([][]int{{1, 3}, {2, 6}, {8, 10}, {15, 18}}))
-	fmt.Println(merge([][]int{{1, 4}, {4, 5}}))
-	fmt.Println(merge([][]int{{1, 4}, {0, 1}}))
+	return res
 }
