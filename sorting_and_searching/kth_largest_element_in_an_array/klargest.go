@@ -3,7 +3,7 @@ package kthlargest
 import "container/heap"
 
 // This problem can be solved by using a min-heap.
-// After bulding a min heap, we pop as many elements as k-1.
+// After building a min heap, we pop as many elements as k-1.
 // We then return heap.Pop() to get the k-th one.
 //
 // T: O(log n)
