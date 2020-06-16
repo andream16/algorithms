@@ -1,14 +1,16 @@
-package main
+package combination
 
-import "fmt"
-
+// We need a function that maps a number a number to its letters. That can be achieved using a map in constant time.
+// Now, for each digit, we get its respective letters. If the result is empty, we add the retrieved letters to it and
+// go on, otherwise, it means that we need to append every single new letter to the combinations in the result.
+//
 // T: O(D*L*C), D = |digits|, L = |letters| per Digit, C = |previous combinations|
 // O(23) -> O(3^3, 3^3)
 // S: O(L^N)
 func letterCombinations(digits string) []string {
 	var (
-		combs   = []string{}
-		letters = []string{}
+		combs   []string
+		letters []string
 	)
 	for _, d := range digits {
 		letters = getLetters(d)
@@ -16,7 +18,7 @@ func letterCombinations(digits string) []string {
 			combs = append(combs, letters...)
 			continue
 		}
-		newComb := []string{}
+		var newComb []string
 		for _, c := range combs {
 			for _, l := range letters {
 				newComb = append(newComb, c+l)
@@ -41,11 +43,4 @@ func getLetters(b rune) []string {
 		return letters
 	}
 	return nil
-}
-
-// Input: "23"
-// Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
-
-func main() {
-	fmt.Println(letterCombinations("23"))
 }

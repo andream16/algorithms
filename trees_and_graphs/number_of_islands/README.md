@@ -29,6 +29,6 @@ Example 2:
 
 Companies [`Amazon`, `Bloomberg`, `Microsoft`, `Facebook`, `Oracle`, `Google`, `Apple`, `Goldman Sachs`, `Uber`, 
 `Goldman Sachs`, `Tableau`, `Adobe`, `Walmart Labs`, `Evernote`, `Yahoo`, `Salesforce`, `Mathworks`, `Audible`, 
-`Roblox`]
+`Roblox`, `Transferwise`]
 
 Source `Leetcode` - https://leetcode.com/problems/number-of-islands/

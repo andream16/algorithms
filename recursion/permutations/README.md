@@ -15,6 +15,9 @@ Example:
 ]
 ```
 
-Companies [`Facebook`]
+Tags: [`Top 100 Questions`]
 
-Source `Leetcode` - https://leetcode.com/explore/interview/card/facebook/53/recursion-3/292/
+Companies [`Amazon`, `Microsoft`, `Facebook`, `Apple`, `Google`, `LinkedIn`, `eBay`, `Uber`, `Yahoo`, `Oracle`, 
+`Atlassian`]
+
+Source `Leetcode` - https://leetcode.com/problems/permutations/

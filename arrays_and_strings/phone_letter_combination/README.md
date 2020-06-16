@@ -11,3 +11,10 @@ Example:
 
 Note:
 - Although the above answer is in lexicographical order, your answer could be in any order you want.
+
+[`Top 100 Questions`]
+
+Companies [`Amazon`, `Microsoft`, `Google`, `Apple`, `Atlassian`, `Oracle`, 
+`Walmart Labs`, `Lyft`, `Square`, `Uber`, `Salesforce`, `Nutanix`]
+
+Source `Leetcode` - https://leetcode.com/problems/letter-combinations-of-a-phone-number/

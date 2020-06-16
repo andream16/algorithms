@@ -1,13 +1,9 @@
-package main
-
-import (
-	"fmt"
-)
+package permutations
 
 // T: O(N!)
 // S: O(N!)
 func permute(nums []int) [][]int {
-	perms := [][]int{}
+	var perms [][]int
 	if len(nums) == 1 {
 		perms = append(perms, nums)
 		return perms
@@ -26,8 +22,4 @@ func backtrack(first int, nums *[]int, res *[][]int) {
 		backtrack(first+1, nums, res)
 		(*nums)[first], (*nums)[i] = (*nums)[i], (*nums)[first]
 	}
-}
-
-func main() {
-	fmt.Println(permute([]int{1, 2, 3}))
 }
