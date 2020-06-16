@@ -12,6 +12,8 @@ Here are some examples. Inputs are in the left-hand column and its corresponding
 1,1,5 → 1,5,1
 ```
 
-Companies [`Facebook`, `Google`]
+Tags: [`Top 100 Questions`]
+
+Companies [`Facebook`, `Microsoft`, `Amazon`, `ByteDance`, `Apple`, `Atlassian`, `Google`, `eBay`]
 
 Source `Leetcode` - https://leetcode.com/problems/next-permutation/
