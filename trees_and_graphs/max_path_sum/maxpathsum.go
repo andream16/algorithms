@@ -1,8 +1,6 @@
-package main
+package maxpathsum
 
 import "math"
-
-func main() {}
 
 type TreeNode struct {
 	Val   int
@@ -10,7 +8,12 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-// T: DFS O(N)
+// To solve this problem we can use Depth Search First and a concept of maximum gain.
+// When we visit a node, we check the current gain of it by summing up its value and the gain of the various nodes
+// in its subtree. Every time we do so, we check if the current gain is greater than the maximum gain. If so, we update
+// the latter.
+//
+// T: O(N)
 // S: O(N)
 func maxPathSum(root *TreeNode) int {
 	if root == nil {

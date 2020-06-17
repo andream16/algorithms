@@ -1,10 +1,10 @@
-``Given a non-empty binary tree, find the maximum path sum.
+Given a non-empty binary tree, find the maximum path sum.
 
 For this problem, a path is defined as any sequence of nodes from some starting node to any node in the tree along the parent-child connections. The path must contain at least one node and does not need to go through the root.
 
 Example 1:
 
-Input: `[1,2,3]`
+- Input: `[1,2,3]`
 
 ```
        1
@@ -12,11 +12,11 @@ Input: `[1,2,3]`
      2   3
 ```
 
-Output: `6`
+- Output: `6`
 
 Example 2:
 
-Input: `[-10,9,20,null,null,15,7]`
+- Input: `[-10,9,20,null,null,15,7]`
 
 ```
    -10
@@ -26,8 +26,10 @@ Input: `[-10,9,20,null,null,15,7]`
    15   7
 ```
 
-Output: `42`
+- Output: `42`
 
-Companies [`Facebook`]
+Tags: [`Top 100 Questions`]
+     
+Companies [`Facebook`, `Microsoft`, `Amazon`, `Google`, `Uber`, `Lyft`, `ByteDance`]
 
-Source `Leetcode` - https://leetcode.com/explore/interview/card/facebook/52/trees-and-graphs/3022/
+Source `Leetcode` - https://leetcode.com/problems/binary-tree-maximum-path-sum/

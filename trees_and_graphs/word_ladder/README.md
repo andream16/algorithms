@@ -24,6 +24,8 @@ Example 2:
 - Output: `0`
 - Explanation: The endWord `"cog"` is not in wordList, therefore no possible transformation.
 
-Companies [`Google`, `Facebook`]
+Tags: [`Top 100 Questions`]
+     
+Companies [`Amazon`, `Facebook`, `Google`, `Microsoft`, `LinkedIn`, `Oracle`, `Apple`, `Uber`, `ServiceNow`, `Spotify`]
 
 Source `Leetcode` - https://leetcode.com/problems/word-ladder/

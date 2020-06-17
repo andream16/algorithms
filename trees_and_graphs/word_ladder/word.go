@@ -1,6 +1,4 @@
-package main
-
-import "fmt"
+package wordladder
 
 type leveledWord struct {
 	val   string
@@ -96,9 +94,4 @@ func ladderLength(beginWord string, endWord string, wordList []string) int {
 	}
 
 	return 0
-}
-
-func main() {
-	fmt.Println(ladderLength("hit", "cog", []string{"hot", "dot", "dog", "lot", "log", "cog"})) // 5
-	fmt.Println(ladderLength("hit", "cog", []string{"hot", "dot", "dog", "lot", "log"}))        // 0
 }
