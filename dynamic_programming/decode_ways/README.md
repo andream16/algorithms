@@ -21,6 +21,8 @@ Example 2:
 - Output: `3`
 - Explanation: It could be decoded as `"BZ"` `(2 26)`, `"VF"` `(22 6)`, or `"BBF"` `(2 2 6)`.
 
-Companies [`Facebook`]
+Tags: [`Top 100 Questions`]
+     
+Companies [`Facebook`, `Apple`, `Amazon`, `Microsoft`, `Bloomberg`, `Lyft`, `Google`, `Cisco`]
 
-Source `Leetcode` - https://leetcode.com/explore/interview/card/facebook/55/dynamic-programming-3/264/
+Source `Leetcode` - https://leetcode.com/problems/decode-ways/
