@@ -14,6 +14,8 @@ Example 2:
 - Input: `nums = [5,7,7,8,8,10]`, `target = 6`
 - Output: `[-1,-1]`
 
+Tags: [`Top 100 Questions`]
+
 Companies [`Facebook`, `Google`, `Uber`, `Amazon`, `Apple`, `LinkedIn`, `Oracle`, `Microsoft`, `Netflix`]
 
 Source `Leetcode` - https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/

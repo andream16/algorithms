@@ -26,7 +26,7 @@ func validPalindrome(s string) bool {
 		return true
 	}
 
-	return isPalindrome(s[:left] + s[left+1:]) || isPalindrome(s[:right] + s[right+1:])
+	return isPalindrome(s[:left]+s[left+1:]) || isPalindrome(s[:right]+s[right+1:])
 
 }
 
