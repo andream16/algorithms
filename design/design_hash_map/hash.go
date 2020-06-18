@@ -12,7 +12,7 @@ type MyHashMap struct {
 	Buckets []*list.List
 }
 
-// The bigger the cap, the more buckets we can have, the more efficient the lookups in them is.
+// The bigger the cap, the more buckets we can have, the more efficient the lookup in them is.
 // Not using prime numbers will result into a worst distribution because of more factors -> collisions.
 // We use a linked list in the buckets to make a very quick lookup.
 //
