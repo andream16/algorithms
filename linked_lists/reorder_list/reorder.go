@@ -1,6 +1,4 @@
-package main
-
-import "fmt"
+package reorderlist
 
 type ListNode struct {
 	Val  int
@@ -31,6 +29,7 @@ func (q *Stack) empty() bool {
 	return len(q.Nodes) == 0
 }
 
+// TODO REVIEW
 // T: O(|list|) + O(|list|)
 // S: O(|list|)
 func reorderList(head *ListNode) {
@@ -57,27 +56,4 @@ func reorderList(head *ListNode) {
 		ctr++
 	}
 
-}
-
-func main() {
-	l := &ListNode{
-		Val: 1,
-		Next: &ListNode{
-			Val: 2,
-			Next: &ListNode{
-				Val: 3,
-				Next: &ListNode{
-					Val: 4,
-					Next: &ListNode{
-						Val: 5,
-					},
-				},
-			},
-		},
-	}
-	reorderList(l)
-	for l != nil {
-		fmt.Println(l.Val)
-		l = l.Next
-	}
 }

@@ -1,6 +1,4 @@
-package main
-
-func main() {}
+package lowestcommonancestor
 
 type TreeNode struct {
 	Val   int
@@ -38,6 +36,7 @@ func (q *queue) empty() bool {
 	return len(q.nodes) == 0
 }
 
+// TODO REVIEW
 // T: BFS O(N) + O(hist1*hist2)
 // S: N*history, history = depth of n
 func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {

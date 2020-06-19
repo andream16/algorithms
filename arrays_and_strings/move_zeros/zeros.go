@@ -1,10 +1,6 @@
-package main
+package movezeroes
 
-import "fmt"
-
-// Input: [0,1,0,3,12]
-// Output: [1,3,12,0,0]
-
+// TODO review
 func moveZeroes(nums []int) {
 	var (
 		zeros = 0
@@ -20,10 +16,4 @@ func moveZeroes(nums []int) {
 			i--
 		}
 	}
-}
-
-func main() {
-	a := []int{0, 1, 0, 3, 12}
-	moveZeroes(a)
-	fmt.Println(a)
 }

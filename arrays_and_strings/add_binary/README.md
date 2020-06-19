@@ -19,6 +19,8 @@ Constraints:
 - `1 <= a.length`, `b.length <= 10^4`
 - Each string is either `'0'` or doesn't contain any leading zero.
 
-Companies [`Facebook`]
+Tags: [`Top 100 Questions`]
 
-Source `Leetcode` - https://leetcode.com/explore/interview/card/facebook/5/array-and-strings/263/
+Companies [`Facebook`, `Amazon`, `Apple`, `Google`]
+
+Source `Leetcode` - https://leetcode.com/problems/add-binary/

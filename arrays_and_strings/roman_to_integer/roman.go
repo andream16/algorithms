@@ -1,4 +1,4 @@
-package main
+package romantointeger
 
 func toInt(s byte) int {
 	switch s {
@@ -44,6 +44,7 @@ func getToAdd(curr, next byte) int {
 
 }
 
+// TODO REVIEW
 func romanToInt(s string) int {
 	if s == "" {
 		return 0
@@ -69,5 +70,3 @@ func romanToInt(s string) int {
 
 	return n
 }
-
-func main() {}

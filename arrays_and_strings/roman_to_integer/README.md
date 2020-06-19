@@ -47,6 +47,8 @@ Example 5:
 - Output: `1994`
 - Explanation: `M = 1000`, `CM = 900`, `XC = 90` and `IV = 4`.
 
-Companies [`Facebook`]
+Tags: [`Top 100 Questions`]
 
-Source `Leetcode` - https://leetcode.com/explore/interview/card/facebook/5/array-and-strings/3010/
+Companies [`Amazon`, `Apple`, `Microsoft`, `LinkedIn`, `Facebook`, `Bloomberg`, `Yahoo`, `Adobe`, `Uber`]
+
+Source `Leetcode` - https://leetcode.com/problems/roman-to-integer/

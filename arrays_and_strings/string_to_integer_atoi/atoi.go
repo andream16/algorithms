@@ -1,4 +1,4 @@
-package main
+package atoi
 
 import (
 	"strconv"
@@ -24,28 +24,7 @@ var (
 	}
 )
 
-func isNumberOrSign(s string) bool {
-	_, ok := nums[s]
-	if ok {
-		return true
-	}
-	_, ok = signs[s]
-	return ok
-}
-
-func isNumber(s string) bool {
-	_, ok := nums[s]
-	return ok
-}
-
-func getSign(s string) int {
-	v, ok := signs[s]
-	if !ok {
-		return 1
-	}
-	return v
-}
-
+// TODO REVIEW
 func myAtoi(str string) int {
 
 	str = strings.Trim(str, " ")
@@ -89,4 +68,24 @@ func myAtoi(str string) int {
 	return int(i) * sign
 }
 
-func main() {}
+func isNumberOrSign(s string) bool {
+	_, ok := nums[s]
+	if ok {
+		return true
+	}
+	_, ok = signs[s]
+	return ok
+}
+
+func isNumber(s string) bool {
+	_, ok := nums[s]
+	return ok
+}
+
+func getSign(s string) int {
+	v, ok := signs[s]
+	if !ok {
+		return 1
+	}
+	return v
+}

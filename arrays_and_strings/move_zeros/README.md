@@ -9,6 +9,9 @@ Note:
 - You must do this in-place without making a copy of the array.
 - Minimize the total number of operations.
 
-Companies [`Facebook`]
+Tags: [`Top 100 Questions`]
 
-Source `Leetcode` - https://leetcode.com/explore/interview/card/facebook/5/array-and-strings/262/
+Companies [`Facebook`, `Bloomberg`, `Apple`, `Amazon`, `Yandex`, `eBay`, `Google`, `Oracle`, `Walmart Labs`, `Nutanix`,
+`Goldman Sachs`]
+
+Source `Leetcode` - https://leetcode.com/problems/move-zeroes/
