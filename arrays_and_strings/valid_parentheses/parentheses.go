@@ -8,34 +8,34 @@ package parentheses
 // T: O(n)
 // S: O(n)
 func isValid(s string) bool {
-	var stack []byte
+	var stack []rune
 
-	for i := 0; i < len(s); i++ {
-		if isOpen(s[i]) {
-			stack = append([]byte{s[i]}, stack...)
+	for _, r := range s {
+		if isOpen(r) {
+			stack = append(stack, r)
 			continue
 		}
-		if len(stack) == 0 || !matches(s[i], stack[0]) {
+		if 0 == len(stack) || false == matches(stack[len(stack)-1], r) {
 			return false
 		}
-		stack = stack[1:]
+		stack = stack[:len(stack)-1]
 	}
 
 	return len(stack) == 0
 }
 
-func isOpen(r byte) bool {
-	return r == '(' || r == '[' || r == '{'
+func isOpen(r rune) bool {
+	return '(' == r || '[' == r || '{' == r
 }
 
-func matches(closed, open byte) bool {
-	switch closed {
+func matches(op, cl rune) bool {
+	switch cl {
 	case ')':
-		return open == '('
+		return op == '('
 	case ']':
-		return open == '['
+		return op == '['
 	case '}':
-		return open == '{'
+		return op == '{'
 	}
 	return false
 }
