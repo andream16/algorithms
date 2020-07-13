@@ -1,3 +1,5 @@
+package permutations
+
 // To solve this problem we can use recursion.
 // If we think about it, a combination is valid when it has the same length of the input.
 // So, all we need to do is, have a concept of current combination (left) and left items (right)

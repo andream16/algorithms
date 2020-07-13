@@ -19,10 +19,10 @@ func reverseList(head *ListNode) *ListNode {
 	prev = nil
 
 	for nil != curr {
-		tmp := curr.Next
+		next := curr.Next
 		curr.Next = prev
 		prev = curr
-		curr = tmp
+		curr = next
 	}
 
 	return prev

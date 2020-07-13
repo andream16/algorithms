@@ -18,34 +18,23 @@ type freqWord struct {
 // T: O(n log n)
 // S: O(n)
 func topKFrequent(words []string, k int) []string {
-
 	var (
-		freqWords     = []freqWord{}
-		currFreqWords = map[string]int{}
-		res           = make([]string, k)
+		uniqueWords []string
+		wordCount = map[string]int{}
 	)
-
-	for _, w := range words {
-		idx, ok := currFreqWords[w]
-		if ok {
-			freqWords[idx].frequency++
-			continue
+	for _, word := range words {
+		if _, ok := wordCount[word]; !ok {
+			uniqueWords = append(uniqueWords, word)
 		}
-		freqWords = append(freqWords, freqWord{word: w, frequency: 1})
-		currFreqWords[w] = len(freqWords) - 1
+		wordCount[word]++
 	}
 
-	sort.Slice(freqWords, func(i, j int) bool {
-		if freqWords[i].frequency == freqWords[j].frequency {
-			return freqWords[i].word < freqWords[j].word
+	sort.Slice(uniqueWords, func(i, j int) bool {
+		if wordCount[uniqueWords[i]] == wordCount[uniqueWords[j]] {
+			return uniqueWords[i] < uniqueWords[j]
 		}
-		return freqWords[i].frequency > freqWords[j].frequency
+		return wordCount[uniqueWords[i]] > wordCount[uniqueWords[j]]
 	})
 
-	for i := 0; i < k; i++ {
-		res[i] = freqWords[i].word
-	}
-
-	return res
-
+	return uniqueWords[:k]
 }
