@@ -26,6 +26,7 @@ For each problem you'll usually find:
 - These solutions are opinionated and the result of my knowledge. 
 - Some space/time complexity analysis might be wrong. 
 - Some solutions might not be completed.
+- Some solutions might not be the most efficient ones.
 
 ## contributing
 
