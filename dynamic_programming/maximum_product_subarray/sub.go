@@ -1,9 +1,12 @@
-package main
+package maximum_product_subarray
 
-import (
-	"fmt"
-)
-
+// We default all the variables to the first element of the array if it has at least one element.
+// From there on, we find the maximum between the current element and the old maximum.
+// We do also track the minimum as a negative previous result might translate into a higher maximum if multiplied by
+// another negative number.
+//
+// T: O(n)
+// S: O(1)
 func maxProduct(nums []int) int {
 	if len(nums) == 0 {
 		return 0
@@ -37,13 +40,4 @@ func min(n1, n2 int) int {
 		return n1
 	}
 	return n2
-}
-
-func main() {
-	//fmt.Println(maxProduct([]int{2, 3, -2, 4}))                     // 6
-	//fmt.Println(maxProduct([]int{-2, 0, -1}))                       // 0
-	fmt.Println(maxProduct([]int{2, 6, -3, 1, 0, -3, -7, 8, 0, 9})) // 168
-	//fmt.Println(maxProduct([]int{-1, -1}))                          // 1
-	//fmt.Println(maxProduct([]int{-4, -3, -2}))                      // 12
-	//fmt.Println(maxProduct([]int{2, -5, -2, -4, 3}))                // 24
 }
